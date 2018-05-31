@@ -203,7 +203,8 @@
                 [self presentViewController:activityVC animated:YES completion:nil];
             }
         } else {
-            [self presentPrivacyPolicy];
+            SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:@"https://wwdc.family/privacy.html"]];
+            [self presentViewController:safariVC animated:YES completion:nil];
         }
     }
     [self.tableNode deselectRowAtIndexPath:indexPath animated:YES];
