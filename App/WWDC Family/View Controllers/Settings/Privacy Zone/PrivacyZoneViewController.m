@@ -137,16 +137,6 @@
     [self.mapView setVisibleMapRect:mapRect animated:YES];
 }
 
-#pragma mark - User Region
-
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    if(self.shownUserLocation || [[NSUserDefaults standardUserDefaults] valueForKey:@"DDFPrivacyZone"]) return;
-    MKCoordinateRegion mapRegion;
-    mapRegion.center = mapView.userLocation.coordinate;
-    mapRegion.span = MKCoordinateSpanMake(0.2, 0.2);
-    [mapView setRegion:mapRegion animated:YES];
-}
-
 #pragma mark - Actions
 
 - (void)saveZone {
