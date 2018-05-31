@@ -261,11 +261,6 @@
         return [self roundedRectImageFromImage:result.image size:CGSizeMake(30, 30) withCornerRadius:15];
     } completion:^(PINRemoteImageManagerResult * _Nonnull result) {
         if(result.image){
-            
-            NSLog(@"Updated at %@", user.updatedAt);
-            
-            //NSString *updatedAtString = [NSString stringWithFormat:@"Last updated %@, %@"];
-            
             UserMapAnnotation *annotation = [UserMapAnnotation new];
             annotation.coordinate = CLLocationCoordinate2DMake(user.latitude, user.longitude);
             annotation.title = user.name;

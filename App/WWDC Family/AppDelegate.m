@@ -21,6 +21,7 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
 @interface AppDelegate ()
 
 @property (assign, nonatomic) INTULocationRequestID locationRequestID;
+@property (assign, nonatomic) INTULocationRequestID significantRequestID;
 @property (nonatomic) NSInteger lastLocationUpdateTime;
 
 @end
@@ -60,8 +61,7 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"DDFLocationDisabled"]) return;
 
     INTULocationManager *locMgr = [INTULocationManager sharedInstance];
-    [locMgr subscribeToSignificantLocationChangesWithBlock:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-        NSLog(@"fetchSignificantLocationChanges");
+    self.significantRequestID = [locMgr subscribeToSignificantLocationChangesWithBlock:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
         if (status == INTULocationStatusSuccess) {
             [self storeLocation:currentLocation];
         }
@@ -77,7 +77,6 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
     }
     
     self.locationRequestID = [[INTULocationManager sharedInstance] subscribeToLocationUpdatesWithDesiredAccuracy:accuracy block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-        NSLog(@"fetchLocationChanges");
         if (status == INTULocationStatusSuccess) {
             [self storeLocation:currentLocation];
         } else {
@@ -115,6 +114,9 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
 - (void)stopLocationUpdates {
     [[INTULocationManager sharedInstance] cancelLocationRequest:self.locationRequestID];
     self.locationRequestID = NSNotFound;
+    
+    [[INTULocationManager sharedInstance] cancelLocationRequest:self.significantRequestID];
+    self.significantRequestID = NSNotFound;
 }
 
 - (void)resetLocationUpdates {
@@ -125,6 +127,11 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
 - (void)applicationWillResignActive:(UIApplication *)application {
     [self stopLocationUpdates];
     [self fetchSignificantLocationChanges];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [self stopLocationUpdates];
+    [self fetchLocationChanges];
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
