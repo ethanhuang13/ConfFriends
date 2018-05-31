@@ -61,3 +61,8 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+.DS_Store
+/App/WWDC Family/GoogleService-Info.plist
+/App/WWDC Family/fa-light-300.ttf
+/App/WWDC Family/TwitterService-Info.plist

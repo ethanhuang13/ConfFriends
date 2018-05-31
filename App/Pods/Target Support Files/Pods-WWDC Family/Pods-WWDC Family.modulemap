@@ -1,0 +1,6 @@
+framework module Pods_WWDC_Family {
+  umbrella header "Pods-WWDC Family-umbrella.h"
+
+  export *
+  module * { export * }
+}

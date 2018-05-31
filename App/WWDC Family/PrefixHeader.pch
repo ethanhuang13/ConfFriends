@@ -1,0 +1,17 @@
+//
+//  PrefixHeader.pch
+//  WWDC Family
+//
+//  Created by Andrew Yates on 5/18/18.
+//  Copyright © 2018 AndyDev. All rights reserved.
+//
+
+#import "UIViewController+StatusBarBackground.h"
+#import "UIColor+FCUtilities.h"
+#import "UIImage+FCUtilities.h"
+
+@import Firebase;
+@import FirebaseAuth;
+#import "DDFUser.h"
+
+#import "INTULocationManager.h"

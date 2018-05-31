@@ -1,0 +1,19 @@
+{
+    "id": "user.json",
+    "title": "user",
+    "description" : "Schema definition of Dub Dub Family User",
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+	    "id" : { "type": "string" },
+		"name" : { "type": "string" },
+		"country" : { "type": "string" },
+	    "avatar" : { "type": "string", "format":"uri" },
+		"createdAt" : { "type": "string", "format": "date-time" },
+		"updatedAt" : { "type": "string", "format": "date-time" },
+		"latitude" : { "type": "number" },
+		"longitude" : { "type": "number" },
+		"twitterID" : { "type": "string" },
+		"twitterUsername" : { "type": "string" },
+	}
+}

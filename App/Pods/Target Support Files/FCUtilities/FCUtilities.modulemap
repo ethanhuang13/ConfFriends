@@ -1,0 +1,6 @@
+framework module FCUtilities {
+  umbrella header "FCUtilities-umbrella.h"
+
+  export *
+  module * { export * }
+}
