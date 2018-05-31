@@ -74,7 +74,7 @@
         ASTextCellNode *cell = [[ASTextCellNode alloc] init];
         if(indexPath.section == 0){
             if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFPrivacyZone"]){
-                [cell setText:@"Change Privacy Zone"];
+                [cell setText:@"Change/Remove Privacy Zone"];
             } else {
                 [cell setText:@"Set Privacy Zone"];
             }
@@ -192,8 +192,20 @@
             [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];
         } else if(indexPath.row == 1){
-            SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:@"https://twitter.com/intent/user?screen_name=ay8s"]];
-            [self presentViewController:safariVC animated:YES completion:nil];
+            NSString *handle = @"ay8s";
+            
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot://"]]) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot://%@/user_profile/%@", handle, handle]] options:@{} completionHandler:^(BOOL success) {
+                    
+                }];
+            } else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:handle]] options:@{} completionHandler:^(BOOL success) {
+                    
+                }];
+            } else {
+                SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/intent/user?screen_name=%@", handle]]];
+                [self presentViewController:safariVC animated:YES completion:nil];
+            }
         } else if(indexPath.row == 2){
             UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:@"https://wwdc.family"]] applicationActivities:nil];
             if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
