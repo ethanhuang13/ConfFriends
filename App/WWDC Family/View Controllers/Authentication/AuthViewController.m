@@ -135,16 +135,47 @@
     
     [FCTwitterAuthorization authorizeWithConsumerKey:[twitterConfig valueForKey:@"CONSUMER_KEY"] consumerSecret:[twitterConfig valueForKey:@"CONSUMER_SECRET"] callbackURLScheme:[twitterConfig valueForKey:@"URL_SCHEME"] completion:^(FCTwitterCredentials *credentials) {
         if(credentials){
-            //[MBProgressHUD showHUDAddedTo:self.node.view animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showHUDAddedTo:self.node.view animated:YES];
+            });
             
             FIRAuthCredential *credential = [FIRTwitterAuthProvider credentialWithToken:credentials.token secret:credentials.secret];
             [[FIRAuth auth] signInWithCredential:credential completion:^(FIRUser *user, NSError *error) {
-                //[MBProgressHUD hideHUDForView:self.node.view animated:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.node.view animated:YES];
+                });
                 
                 if (error) {
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
                     [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
                     [self presentViewController:alert animated:YES completion:nil];
+                    return;
+                }
+                
+                if(!user.providerData[0].uid){
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"Your Twitter ID is missing, please try signing in again." preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+                    [self presentViewController:alert animated:YES completion:nil];
+                    
+                    [[FIRAuth auth] signOut:nil];
+                    return;
+                }
+                
+                if(!user.providerData[0].displayName){
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"Your Twitter display name is missing, please try signing in again." preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+                    [self presentViewController:alert animated:YES completion:nil];
+                    
+                    [[FIRAuth auth] signOut:nil];
+                    return;
+                }
+                
+                if(!credentials.username){
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"Your Twitter username is missing, please try signing in again." preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+                    [self presentViewController:alert animated:YES completion:nil];
+                    
+                    [[FIRAuth auth] signOut:nil];
                     return;
                 }
                 
