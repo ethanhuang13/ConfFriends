@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		941EAB2420AF462900BF6D87 /*  .m in Sources */ = {isa = PBXBuildFile; fileRef = 941EAB2320AF462900BF6D87 /*  .m */; };
+		941EAB2420AF462900BF6D87 /* UsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941EAB2320AF462900BF6D87 /* UsersViewController.m */; };
 		941EAB2820AF576500BF6D87 /* UserCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 941EAB2720AF576500BF6D87 /* UserCellNode.m */; };
 		941EAB3220AF744400BF6D87 /* fa-light-300.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 941EAB3120AF744400BF6D87 /* fa-light-300.ttf */; };
 		942D69A320AD03CE003D944F /* PrivacyZoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942D69A220AD03CE003D944F /* PrivacyZoneViewController.m */; };
@@ -21,6 +21,7 @@
 		94469065209553770078878B /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94469064209553770078878B /* AuthViewController.m */; };
 		94469068209553840078878B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94469067209553840078878B /* MapViewController.m */; };
 		9446906A209553D20078878B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94469069209553D20078878B /* GoogleService-Info.plist */; };
+		9456B07620C0A80800922DCE /* fa-brands-400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9456B07520C0A80800922DCE /* fa-brands-400.ttf */; };
 		949B1D1E20A76BAC0006E6D5 /* PlankModelRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 949B1D1A20A76BAC0006E6D5 /* PlankModelRuntime.m */; };
 		949B1D1F20A76BAC0006E6D5 /* DDFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 949B1D1D20A76BAC0006E6D5 /* DDFUser.m */; };
 		949B1D2320A772E80006E6D5 /* UIViewController+StatusBarBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 949B1D2220A772E80006E6D5 /* UIViewController+StatusBarBackground.m */; };
@@ -33,7 +34,7 @@
 /* Begin PBXFileReference section */
 		55BB4C6525E775E1B5B48FB8 /* Pods-WWDC Family.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WWDC Family.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WWDC Family/Pods-WWDC Family.debug.xcconfig"; sourceTree = "<group>"; };
 		941EAB2220AF462900BF6D87 /* UsersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsersViewController.h; sourceTree = "<group>"; };
-		941EAB2320AF462900BF6D87 /*  .m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = " .m"; sourceTree = "<group>"; };
+		941EAB2320AF462900BF6D87 /* UsersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsersViewController.m; sourceTree = "<group>"; };
 		941EAB2520AF47E900BF6D87 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		941EAB2620AF576500BF6D87 /* UserCellNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCellNode.h; sourceTree = "<group>"; };
 		941EAB2720AF576500BF6D87 /* UserCellNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCellNode.m; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		94469066209553840078878B /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		94469067209553840078878B /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		94469069209553D20078878B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9456B07520C0A80800922DCE /* fa-brands-400.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands-400.ttf"; sourceTree = "<group>"; };
 		9498EB4620AFF2A000E69813 /* WWDC Family.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WWDC Family.entitlements"; sourceTree = "<group>"; };
 		949B1D1A20A76BAC0006E6D5 /* PlankModelRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlankModelRuntime.m; path = ../../../Plank/models/PlankModelRuntime.m; sourceTree = "<group>"; };
 		949B1D1B20A76BAC0006E6D5 /* DDFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDFUser.h; path = ../../../Plank/models/DDFUser.h; sourceTree = "<group>"; };
@@ -98,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				941EAB2220AF462900BF6D87 /* UsersViewController.h */,
-				941EAB2320AF462900BF6D87 /*  .m */,
+				941EAB2320AF462900BF6D87 /* UsersViewController.m */,
 				941EAB2620AF576500BF6D87 /* UserCellNode.h */,
 				941EAB2720AF576500BF6D87 /* UserCellNode.m */,
 			);
@@ -153,6 +155,7 @@
 				94469069209553D20078878B /* GoogleService-Info.plist */,
 				944303C920B7AB6A00F5AB38 /* TwitterService-Info.plist */,
 				941EAB3120AF744400BF6D87 /* fa-light-300.ttf */,
+				9456B07520C0A80800922DCE /* fa-brands-400.ttf */,
 				94469053209552A90078878B /* Assets.xcassets */,
 				94469055209552A90078878B /* LaunchScreen.storyboard */,
 				94469058209552A90078878B /* Info.plist */,
@@ -310,6 +313,7 @@
 				944303CA20B7AB6A00F5AB38 /* TwitterService-Info.plist in Resources */,
 				94469054209552A90078878B /* Assets.xcassets in Resources */,
 				9446906A209553D20078878B /* GoogleService-Info.plist in Resources */,
+				9456B07620C0A80800922DCE /* fa-brands-400.ttf in Resources */,
 				941EAB3220AF744400BF6D87 /* fa-light-300.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,7 +422,7 @@
 				949B1D2920A782E20006E6D5 /* SettingsViewController.m in Sources */,
 				942D69A620AD0C93003D944F /* NSUserDefaults+MKMapRect.m in Sources */,
 				941EAB2820AF576500BF6D87 /* UserCellNode.m in Sources */,
-				941EAB2420AF462900BF6D87 /*  .m in Sources */,
+				941EAB2420AF462900BF6D87 /* UsersViewController.m in Sources */,
 				949B1D1F20A76BAC0006E6D5 /* DDFUser.m in Sources */,
 				942D69A320AD03CE003D944F /* PrivacyZoneViewController.m in Sources */,
 				94C8675E20A2D11200DC4312 /* UserMapAnnotation.m in Sources */,

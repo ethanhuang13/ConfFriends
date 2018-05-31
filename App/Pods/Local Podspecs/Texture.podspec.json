@@ -1,6 +1,6 @@
 {
   "name": "Texture",
-  "version": "2.6",
+  "version": "2.7",
   "license": {
     "type": "BSD and Apache 2"
   },
@@ -15,7 +15,7 @@
   "summary": "Smooth asynchronous user interfaces for iOS apps.",
   "source": {
     "git": "https://github.com/TextureGroup/Texture.git",
-    "tag": "2.6"
+    "tag": "2.7"
   },
   "module_name": "AsyncDisplayKit",
   "header_dir": "AsyncDisplayKit",

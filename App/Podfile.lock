@@ -63,10 +63,10 @@ PODS:
   - PINRemoteImage/PINCache (3.0.0-beta.13):
     - PINCache (= 3.0.1-beta.6)
     - PINRemoteImage/Core
-  - Texture (2.6):
-    - Texture/PINRemoteImage (= 2.6)
-  - Texture/Core (2.6)
-  - Texture/PINRemoteImage (2.6):
+  - Texture (2.7):
+    - Texture/PINRemoteImage (= 2.7)
+  - Texture/Core (2.7)
+  - Texture/PINRemoteImage (2.7):
     - PINRemoteImage/iOS (= 3.0.0-beta.13)
     - PINRemoteImage/PINCache
     - Texture/Core
@@ -93,7 +93,7 @@ CHECKOUT OPTIONS:
     :commit: bd0ba1f304a2528711a4f8500f6debdb0267af63
     :git: https://github.com/marcoarment/FCUtilities.git
   Texture:
-    :commit: 73cdc1b4e46a73e0e8dea7257eeb4ab7066fbb71
+    :commit: 6bdf57210e88e0680734d0bbc65d1a67be27dcfe
     :git: https://github.com/texturegroup/Texture.git
 
 SPEC CHECKSUMS:
@@ -115,7 +115,7 @@ SPEC CHECKSUMS:
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
-  Texture: 8f40946033f33f67f4f0bbf18285ff51cd6c6b37
+  Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
 PODFILE CHECKSUM: 5da1e84e3269e329268ef42eaa390f74741ab576
 
