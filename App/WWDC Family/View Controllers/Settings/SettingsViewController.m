@@ -12,6 +12,7 @@
 #import <SafariServices/SFSafariViewController.h>
 #import "PrivacyZoneViewController.h"
 #import "PrivacyViewController.h"
+#import "CountryViewController.h"
 
 @interface SettingsViewController () <ASTableDataSource, ASTableDelegate>
 
@@ -50,22 +51,24 @@
 #pragma mark - Table Data Source
 
 - (NSInteger)numberOfSectionsInTableNode:(ASTableNode *)tableNode {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableNode:(ASTableNode *)tableNode numberOfRowsInSection:(NSInteger)section {
-    if(section == 0) return 1;
+    if(section == 0) return 2;
     if(section == 1) return 1;
-    if(section == 2) return 2;
-    if(section == 3) return 4;
+    if(section == 2) return 1;
+    if(section == 3) return 2;
+    if(section == 4) return 4;
     return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if(section == 0) return @"Privacy Zone";
-    if(section == 1) return @"Location";
-    if(section == 2) return @"Account Options";
-    if(section == 3) return @"Misc";
+    if(section == 0) return @"Profile";
+    if(section == 1) return @"Privacy Zone";
+    if(section == 2) return @"Location";
+    if(section == 3) return @"Account Options";
+    if(section == 4) return @"Misc";
     return @"";
 }
 
@@ -73,14 +76,20 @@
     ASCellNode *(^ASCellNodeBlock)(void) = ^ASCellNode *() {
         ASTextCellNode *cell = [[ASTextCellNode alloc] init];
         if(indexPath.section == 0){
+            if(indexPath.row == 0){
+                [cell setText:@"Change Name"];
+            } else if(indexPath.row == 1){
+                [cell setText:@"Set Country"];
+            }
+        } else if(indexPath.section == 1){
             if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFPrivacyZone"]){
                 [cell setText:@"Change/Remove Privacy Zone"];
             } else {
                 [cell setText:@"Set Privacy Zone"];
             }
-        } else if(indexPath.section == 1){
-            [cell setText:@"Change Location Accuracy"];
         } else if(indexPath.section == 2){
+            [cell setText:@"Change Location Accuracy"];
+        } else if(indexPath.section == 3){
             if(indexPath.row == 0){
                 [cell setText:@"Delete Account"];
             } else if(indexPath.row == 1){
@@ -107,10 +116,18 @@
 
 - (void)tableNode:(ASTableNode *)tableNode didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0){
+        if(indexPath.row == 0){
+            [self presentNameAlert];
+        } else {
+            CountryViewController *countryView = [[CountryViewController alloc] init];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:countryView];
+            [self presentViewController:navController animated:YES completion:nil];
+        }
+    } else if(indexPath.section == 1){
         PrivacyZoneViewController *privacyZoneView = [[PrivacyZoneViewController alloc] init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:privacyZoneView];
         [self presentViewController:navController animated:YES completion:nil];
-    } else if(indexPath.section == 1){
+    } else if(indexPath.section == 2){
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         UIAlertController *alert;
@@ -148,13 +165,13 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
         
         [self presentViewController:alert animated:YES completion:nil];
-    } else if(indexPath.section == 2){
+    } else if(indexPath.section == 3){
         if(indexPath.row == 0){
             [self deleteUser];
         } else {
             [self signoutUser];
         }
-    } else if(indexPath.section == 3){
+    } else if(indexPath.section == 4){
         if(indexPath.row == 0){
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"About" message:@"Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly." preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"@ay8s on Twitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -227,6 +244,7 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:@"Your account will be deleted along with your user profile. You'll be able to signup again at anytime." preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [appDelegate stopLocationUpdates];
         
         [[[[[FIRDatabase database] reference] child:@"users"] child:[[[FIRAuth auth] currentUser] uid]] removeValue];
         
@@ -253,6 +271,37 @@
     [self dismissViewControllerAnimated:YES completion:^{
         [appDelegate.window.rootViewController presentViewController:[AuthViewController new] animated:YES completion:nil];
     }];
+}
+
+- (void)presentNameAlert {
+    
+    [[[[[FIRDatabase database] reference] child:@"users"] child:[[[FIRAuth auth] currentUser] uid]] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        if(snapshot.exists){
+            DDFUser *user = [[DDFUser alloc] initWithModelDictionary:snapshot.value];
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Change Name" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                [textField setPlaceholder:@"Name"];
+                [textField setText:user.name];
+            }];
+            
+            UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if([alertController.textFields.firstObject.text isEqualToString:@""]){
+                    return;
+                }
+                [[[[[FIRDatabase database] reference] child:@"users"] child:[[[FIRAuth auth] currentUser] uid]] updateChildValues:@{@"name":alertController.textFields.firstObject.text}];
+
+            }];
+            [alertController addAction:saveAction];
+
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }];
+    
+    
 }
 
 - (void)presentPrivacyPolicy {

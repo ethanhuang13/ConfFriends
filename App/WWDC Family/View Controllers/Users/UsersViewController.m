@@ -50,6 +50,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFUserCountry"]){
+        UISegmentedControl *userFilterControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"All", [[NSUserDefaults standardUserDefaults] valueForKey:@"DDFUserCountry"], nil]];
+        [userFilterControl addTarget:self action:@selector(userFilterControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [userFilterControl setSelectedSegmentIndex:0];
+        self.navigationItem.titleView = userFilterControl;
+    }
+    
     return self;
 }
 
@@ -65,7 +72,9 @@
             for(NSString *userID in [snapshot.value allKeys]){
                 NSMutableDictionary *user = [snapshot.value valueForKey:userID];
                 [user addEntriesFromDictionary:@{@"id":userID}];
-                [self.allUsers addObject:[[DDFUser alloc] initWithModelDictionary:user]];
+                
+                DDFUser *model = [[DDFUser alloc] initWithModelDictionary:user];
+                if(model.name && model.twitterUsername) [self.allUsers addObject:[[DDFUser alloc] initWithModelDictionary:user]];
             }
             
             // Sort Users
@@ -77,6 +86,56 @@
         }
     }];
 }
+
+- (void)userFilterControlValueChanged:(UISegmentedControl *)control {
+    self.allUsers = [NSMutableArray new];
+    self.filteredUsers = [NSMutableArray new];
+    
+    [self.tableNode reloadData];
+    
+    if(control.selectedSegmentIndex == 0){
+        [[[[FIRDatabase database] reference] child:@"users"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            if(snapshot.exists){
+                for(NSString *userID in [snapshot.value allKeys]){
+                    NSMutableDictionary *user = [snapshot.value valueForKey:userID];
+                    [user addEntriesFromDictionary:@{@"id":userID}];
+                    
+                    DDFUser *model = [[DDFUser alloc] initWithModelDictionary:user];
+                    if(model.name && model.twitterUsername) [self.allUsers addObject:[[DDFUser alloc] initWithModelDictionary:user]];
+                }
+                
+                // Sort Users
+                NSSortDescriptor *userSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+                self.allUsers = [[self.allUsers sortedArrayUsingDescriptors:@[userSortDescriptor]] mutableCopy];
+                self.filteredUsers = [self.allUsers copy];
+                
+                [self.tableNode reloadData];
+            }
+        }];
+    } else {
+        [[[[[[FIRDatabase database] reference] child:@"users"] queryOrderedByChild:@"country"] queryEqualToValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"DDFUserCountry"]] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            if(snapshot.exists){
+                for(NSString *userID in [snapshot.value allKeys]){
+                    NSMutableDictionary *user = [snapshot.value valueForKey:userID];
+                    [user addEntriesFromDictionary:@{@"id":userID}];
+                    
+                    DDFUser *model = [[DDFUser alloc] initWithModelDictionary:user];
+                    if(model.name && model.twitterUsername) [self.allUsers addObject:[[DDFUser alloc] initWithModelDictionary:user]];
+                }
+                
+                // Sort Users
+                NSSortDescriptor *userSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+                self.allUsers = [[self.allUsers sortedArrayUsingDescriptors:@[userSortDescriptor]] mutableCopy];
+                self.filteredUsers = [self.allUsers copy];
+                
+                [self.tableNode reloadData];
+            }
+        }];
+    }
+}
+
+
+
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     if(![self.previousSearch isEqualToString:searchController.searchBar.text]){
@@ -119,6 +178,9 @@
     }
     
     DDFUser *user = [self.filteredUsers objectAtIndex:indexPath.row];
+    
+    NSLog(@"user %@", user.dictionaryObjectRepresentation);
+    
     if(user.latitude && user.longitude){
         [self dismissViewControllerAnimated:YES completion:^{
             if([self.delegate respondsToSelector:@selector(ddf_didSelectUser:)]){

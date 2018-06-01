@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy, readonly) NSString * name;
 @property (nullable, nonatomic, copy, readonly) NSString * identifier;
 @property (nullable, nonatomic, copy, readonly) NSDate * createdAt;
+@property (nullable, nonatomic, copy, readonly) NSString * countryCode;
 @property (nullable, nonatomic, copy, readonly) NSURL * avatar;
 @property (nullable, nonatomic, copy, readonly) NSString * twitterID;
 @property (nullable, nonatomic, copy, readonly) NSDate * updatedAt;
@@ -41,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy, readwrite) NSString * name;
 @property (nullable, nonatomic, copy, readwrite) NSString * identifier;
 @property (nullable, nonatomic, copy, readwrite) NSDate * createdAt;
+@property (nullable, nonatomic, copy, readwrite) NSString * countryCode;
 @property (nullable, nonatomic, copy, readwrite) NSURL * avatar;
 @property (nullable, nonatomic, copy, readwrite) NSString * twitterID;
 @property (nullable, nonatomic, copy, readwrite) NSDate * updatedAt;

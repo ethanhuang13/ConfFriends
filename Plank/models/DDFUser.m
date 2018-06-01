@@ -11,6 +11,7 @@
 struct DDFUserDirtyProperties {
     unsigned int DDFUserDirtyPropertyAvatar:1;
     unsigned int DDFUserDirtyPropertyCountry:1;
+    unsigned int DDFUserDirtyPropertyCountryCode:1;
     unsigned int DDFUserDirtyPropertyCreatedAt:1;
     unsigned int DDFUserDirtyPropertyIdentifier:1;
     unsigned int DDFUserDirtyPropertyLatitude:1;
@@ -71,6 +72,15 @@ struct DDFUserDirtyProperties {
                     self->_country = [value copy];
                 }
                 self->_userDirtyProperties.DDFUserDirtyPropertyCountry = 1;
+            }
+        }
+        {
+            __unsafe_unretained id value = modelDictionary[@"countryCode"]; // Collection will retain.
+            if (value != nil) {
+                if (value != (id)kCFNull) {
+                    self->_countryCode = [value copy];
+                }
+                self->_userDirtyProperties.DDFUserDirtyPropertyCountryCode = 1;
             }
         }
         {
@@ -163,6 +173,7 @@ struct DDFUserDirtyProperties {
     }
     _avatar = builder.avatar;
     _country = builder.country;
+    _countryCode = builder.countryCode;
     _createdAt = builder.createdAt;
     _identifier = builder.identifier;
     _latitude = builder.latitude;
@@ -180,7 +191,7 @@ struct DDFUserDirtyProperties {
 - (NSString *)debugDescription
 {
     NSArray<NSString *> *parentDebugDescription = [[super debugDescription] componentsSeparatedByString:@"\n"];
-    NSMutableArray *descriptionFields = [NSMutableArray arrayWithCapacity:10];
+    NSMutableArray *descriptionFields = [NSMutableArray arrayWithCapacity:11];
     [descriptionFields addObject:parentDebugDescription];
     struct DDFUserDirtyProperties props = _userDirtyProperties;
     if (props.DDFUserDirtyPropertyAvatar) {
@@ -188,6 +199,9 @@ struct DDFUserDirtyProperties {
     }
     if (props.DDFUserDirtyPropertyCountry) {
         [descriptionFields addObject:[@"_country = " stringByAppendingFormat:@"%@", _country]];
+    }
+    if (props.DDFUserDirtyPropertyCountryCode) {
+        [descriptionFields addObject:[@"_countryCode = " stringByAppendingFormat:@"%@", _countryCode]];
     }
     if (props.DDFUserDirtyPropertyCreatedAt) {
         [descriptionFields addObject:[@"_createdAt = " stringByAppendingFormat:@"%@", _createdAt]];
@@ -240,6 +254,7 @@ struct DDFUserDirtyProperties {
         (_latitude == anObject.latitude) &&
         (_avatar == anObject.avatar || [_avatar isEqual:anObject.avatar]) &&
         (_country == anObject.country || [_country isEqualToString:anObject.country]) &&
+        (_countryCode == anObject.countryCode || [_countryCode isEqualToString:anObject.countryCode]) &&
         (_createdAt == anObject.createdAt || [_createdAt isEqualToDate:anObject.createdAt]) &&
         (_identifier == anObject.identifier || [_identifier isEqualToString:anObject.identifier]) &&
         (_name == anObject.name || [_name isEqualToString:anObject.name]) &&
@@ -254,6 +269,7 @@ struct DDFUserDirtyProperties {
         17,
         [_avatar hash],
         [_country hash],
+        [_countryCode hash],
         [_createdAt hash],
         [_identifier hash],
          [@(_latitude) hash],
@@ -278,7 +294,7 @@ struct DDFUserDirtyProperties {
 }
 - (NSDictionary *)dictionaryObjectRepresentation
 {
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:10];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:11];
     if (_userDirtyProperties.DDFUserDirtyPropertyAvatar) {
         if (_avatar != (id)kCFNull) {
             [dict setObject:[_avatar absoluteString] forKey:@"avatar"];
@@ -291,6 +307,13 @@ struct DDFUserDirtyProperties {
             [dict setObject:_country forKey:@"country"];
         } else {
             [dict setObject:[NSNull null] forKey:@"country"];
+        }
+    }
+    if (_userDirtyProperties.DDFUserDirtyPropertyCountryCode) {
+        if (_countryCode != (id)kCFNull) {
+            [dict setObject:_countryCode forKey:@"countryCode"];
+        } else {
+            [dict setObject:[NSNull null] forKey:@"countryCode"];
         }
     }
     if (_userDirtyProperties.DDFUserDirtyPropertyCreatedAt) {
@@ -370,6 +393,7 @@ struct DDFUserDirtyProperties {
     }
     _avatar = [aDecoder decodeObjectOfClass:[NSURL class] forKey:@"avatar"];
     _country = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"country"];
+    _countryCode = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"countryCode"];
     _createdAt = [aDecoder decodeObjectOfClass:[NSDate class] forKey:@"createdAt"];
     _identifier = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"id"];
     _latitude = [aDecoder decodeDoubleForKey:@"latitude"];
@@ -380,6 +404,7 @@ struct DDFUserDirtyProperties {
     _updatedAt = [aDecoder decodeObjectOfClass:[NSDate class] forKey:@"updatedAt"];
     _userDirtyProperties.DDFUserDirtyPropertyAvatar = [aDecoder decodeIntForKey:@"avatar_dirty_property"] & 0x1;
     _userDirtyProperties.DDFUserDirtyPropertyCountry = [aDecoder decodeIntForKey:@"country_dirty_property"] & 0x1;
+    _userDirtyProperties.DDFUserDirtyPropertyCountryCode = [aDecoder decodeIntForKey:@"countryCode_dirty_property"] & 0x1;
     _userDirtyProperties.DDFUserDirtyPropertyCreatedAt = [aDecoder decodeIntForKey:@"createdAt_dirty_property"] & 0x1;
     _userDirtyProperties.DDFUserDirtyPropertyIdentifier = [aDecoder decodeIntForKey:@"id_dirty_property"] & 0x1;
     _userDirtyProperties.DDFUserDirtyPropertyLatitude = [aDecoder decodeIntForKey:@"latitude_dirty_property"] & 0x1;
@@ -397,6 +422,7 @@ struct DDFUserDirtyProperties {
 {
     [aCoder encodeObject:self.avatar forKey:@"avatar"];
     [aCoder encodeObject:self.country forKey:@"country"];
+    [aCoder encodeObject:self.countryCode forKey:@"countryCode"];
     [aCoder encodeObject:self.createdAt forKey:@"createdAt"];
     [aCoder encodeObject:self.identifier forKey:@"id"];
     [aCoder encodeDouble:self.latitude forKey:@"latitude"];
@@ -407,6 +433,7 @@ struct DDFUserDirtyProperties {
     [aCoder encodeObject:self.updatedAt forKey:@"updatedAt"];
     [aCoder encodeInt:_userDirtyProperties.DDFUserDirtyPropertyAvatar forKey:@"avatar_dirty_property"];
     [aCoder encodeInt:_userDirtyProperties.DDFUserDirtyPropertyCountry forKey:@"country_dirty_property"];
+    [aCoder encodeInt:_userDirtyProperties.DDFUserDirtyPropertyCountryCode forKey:@"countryCode_dirty_property"];
     [aCoder encodeInt:_userDirtyProperties.DDFUserDirtyPropertyCreatedAt forKey:@"createdAt_dirty_property"];
     [aCoder encodeInt:_userDirtyProperties.DDFUserDirtyPropertyIdentifier forKey:@"id_dirty_property"];
     [aCoder encodeInt:_userDirtyProperties.DDFUserDirtyPropertyLatitude forKey:@"latitude_dirty_property"];
@@ -431,6 +458,9 @@ struct DDFUserDirtyProperties {
     }
     if (userDirtyProperties.DDFUserDirtyPropertyCountry) {
         _country = modelObject.country;
+    }
+    if (userDirtyProperties.DDFUserDirtyPropertyCountryCode) {
+        _countryCode = modelObject.countryCode;
     }
     if (userDirtyProperties.DDFUserDirtyPropertyCreatedAt) {
         _createdAt = modelObject.createdAt;
@@ -473,6 +503,9 @@ struct DDFUserDirtyProperties {
     if (modelObject.userDirtyProperties.DDFUserDirtyPropertyCountry) {
         builder.country = modelObject.country;
     }
+    if (modelObject.userDirtyProperties.DDFUserDirtyPropertyCountryCode) {
+        builder.countryCode = modelObject.countryCode;
+    }
     if (modelObject.userDirtyProperties.DDFUserDirtyPropertyCreatedAt) {
         builder.createdAt = modelObject.createdAt;
     }
@@ -507,6 +540,11 @@ struct DDFUserDirtyProperties {
 {
     _country = [country copy];
     _userDirtyProperties.DDFUserDirtyPropertyCountry = 1;
+}
+- (void)setCountryCode:(NSString *)countryCode
+{
+    _countryCode = [countryCode copy];
+    _userDirtyProperties.DDFUserDirtyPropertyCountryCode = 1;
 }
 - (void)setCreatedAt:(NSDate *)createdAt
 {
