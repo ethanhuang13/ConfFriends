@@ -255,7 +255,7 @@
 
 - (void)addUserMarker:(DDFUser *)user {
     if([self.userAnnotations objectForKey:user.identifier]) return;
-    if(!user.latitude || !user.longitude) return;
+    if(!user.latitude || !user.longitude || !user.avatar) return;
     
     [[PINRemoteImageManager sharedImageManager] downloadImageWithURL:user.avatar options:PINRemoteImageManagerDownloadOptionsNone processorKey:@"wwdcfamily" processor:^UIImage * _Nullable(PINRemoteImageManagerResult * _Nonnull result, NSUInteger * _Nonnull cost) {
         return [self roundedRectImageFromImage:result.image size:CGSizeMake(30, 30) withCornerRadius:15];
@@ -304,12 +304,48 @@
         }
         
         annotationView.image = ((UserMapAnnotation *)annotation).image;
-        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+        if(((UserMapAnnotation *)annotation).user.country){
+            UIImageView *flag = [[UIImageView alloc] initWithImage:[UIImage imageNamed:((UserMapAnnotation *)annotation).user.countryCode]];
+            [flag setFrame:CGRectMake(0, 0, 25, 19)];
+            annotationView.rightCalloutAccessoryView = flag;
+        } else {
+            annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        }
+        
         annotationView.canShowCallout = YES;
         
         return annotationView;
     }
     return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(calloutTapped:)];
+    [view addGestureRecognizer:tapGesture];
+}
+
+-(void)calloutTapped:(UITapGestureRecognizer *)sender {
+    MKAnnotationView *view = (MKAnnotationView*)sender.view;
+    if([view.annotation isKindOfClass:[UserMapAnnotation class]]){
+        UserMapAnnotation *annotation = (UserMapAnnotation *)view.annotation;
+        DDFUser *user = annotation.user;
+        
+        NSString *handle = user.twitterUsername;
+        
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot://"]]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tweetbot://%@/user_profile/%@", handle, handle]] options:@{} completionHandler:^(BOOL success) {
+                
+            }];
+        } else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:handle]] options:@{} completionHandler:^(BOOL success) {
+                
+            }];
+        } else {
+            SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/intent/user?user_id=%@", user.twitterID]]];
+            [self presentViewController:safariVC animated:YES completion:nil];
+        }
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
