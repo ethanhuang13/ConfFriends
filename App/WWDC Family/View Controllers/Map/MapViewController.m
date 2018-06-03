@@ -263,14 +263,14 @@
     if(!user.latitude || !user.longitude || !user.avatar) return;
     
     [[PINRemoteImageManager sharedImageManager] downloadImageWithURL:user.avatar options:PINRemoteImageManagerDownloadOptionsNone processorKey:@"wwdcfamily" processor:^UIImage * _Nullable(PINRemoteImageManagerResult * _Nonnull result, NSUInteger * _Nonnull cost) {
-        return [self roundedRectImageFromImage:result.image size:CGSizeMake(30, 30) withCornerRadius:15];
+        return result.image;
     } completion:^(PINRemoteImageManagerResult * _Nonnull result) {
         if(result.image){
             UserMapAnnotation *annotation = [UserMapAnnotation new];
             annotation.coordinate = CLLocationCoordinate2DMake(user.latitude, user.longitude);
             annotation.title = user.name;
             annotation.subtitle = [NSString stringWithFormat:@"Last updated %@", [[user.updatedAt timeAgo] lowercaseString]];
-            annotation.image = [self roundedRectImageFromImage:result.image size:CGSizeMake(30, 30) withCornerRadius:15];
+            annotation.image = [self roundedRectImageFromImage:[UIImage imageWithData:UIImageJPEGRepresentation(result.image, 0.75)] size:CGSizeMake(30, 30) withCornerRadius:15];
             annotation.user = user;
             
             dispatch_async(dispatch_get_main_queue(), ^{
