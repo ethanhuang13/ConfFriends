@@ -211,6 +211,7 @@
                 if([self.userAnnotations objectForKey:snapshot.key]){
                     UserMapAnnotation *userAnnotation = [self.userAnnotations objectForKey:snapshot.key];
                     userAnnotation.coordinate = CLLocationCoordinate2DMake(user.latitude, user.longitude);
+                    userAnnotation.subtitle = [NSString stringWithFormat:@"Last updated %@", [[user.updatedAt timeAgo] lowercaseString]];
                 } else {
                     [self addUserMarker:user];
                 }
