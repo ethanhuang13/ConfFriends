@@ -9,6 +9,7 @@
 #import "UsersViewController.h"
 #import "UserCellNode.h"
 #import <SafariServices/SFSafariViewController.h>
+#import "MBProgressHUD.h"
 
 @interface UsersViewController () <ASTableDataSource, ASTableDelegate, UISearchResultsUpdating>
 
@@ -66,6 +67,8 @@
     self.allUsers = [NSMutableArray new];
     self.filteredUsers = [NSMutableArray new];
     
+    [MBProgressHUD showHUDAddedTo:self.node.view animated:YES];
+
     // User Added
     [[[[FIRDatabase database] reference] child:@"users"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         if(snapshot.exists){
@@ -83,6 +86,10 @@
             self.filteredUsers = [self.allUsers copy];
             
             [self.tableNode reloadData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.node.view animated:YES];
+            });
         }
     }];
 }
@@ -92,6 +99,8 @@
     self.filteredUsers = [NSMutableArray new];
     
     [self.tableNode reloadData];
+    
+    [MBProgressHUD showHUDAddedTo:self.node.view animated:YES];
     
     if(control.selectedSegmentIndex == 0){
         [[[[FIRDatabase database] reference] child:@"users"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -110,6 +119,10 @@
                 self.filteredUsers = [self.allUsers copy];
                 
                 [self.tableNode reloadData];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.node.view animated:YES];
+                });
             }
         }];
     } else {
@@ -129,6 +142,10 @@
                 self.filteredUsers = [self.allUsers copy];
                 
                 [self.tableNode reloadData];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.node.view animated:YES];
+                });
             }
         }];
     }
