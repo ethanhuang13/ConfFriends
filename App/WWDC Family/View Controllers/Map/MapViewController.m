@@ -13,6 +13,7 @@
 #import "SettingsViewController.h"
 #import "UsersViewController.h"
 #import "AppDelegate.h"
+#import "NSDate+TimeAgo.h"
 
 @interface MapViewController () <MKMapViewDelegate, UsersViewControllerDelegate>
 
@@ -69,6 +70,7 @@
     [userLocationButtonNode setTitle:@"" withFont:[UIFont fontWithName:@"FontAwesome5ProLight" size:15.0] withColor:[UIColor fc_colorWithHexString:@"ff0066"] forState:UIControlStateNormal];
     [userLocationButtonNode setTitle:@"" withFont:[UIFont fontWithName:@"FontAwesome5ProLight" size:15.0] withColor:[UIColor fc_colorWithHexString:@"ff3686"] forState:UIControlStateHighlighted];
     [userLocationButtonNode addTarget:self action:@selector(showUserLocation) forControlEvents:ASControlNodeEventTouchUpInside];
+    [userLocationButtonNode setAccessibilityLabel:@"Zoom to your location"];
     
     
     ASDisplayNode *searchBackgroundNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView *{
@@ -83,7 +85,8 @@
     [searchButtonNode setTitle:@"" withFont:[UIFont fontWithName:@"FontAwesome5ProLight" size:15.0] withColor:[UIColor fc_colorWithHexString:@"ff0066"] forState:UIControlStateNormal];
     [searchButtonNode setTitle:@"" withFont:[UIFont fontWithName:@"FontAwesome5ProLight" size:15.0] withColor:[UIColor fc_colorWithHexString:@"ff3686"] forState:UIControlStateHighlighted];
     [searchButtonNode addTarget:self action:@selector(presentUsers) forControlEvents:ASControlNodeEventTouchUpInside];
-    
+    [searchButtonNode setAccessibilityLabel:@"Search Users"];
+
     
     
     ASDisplayNode *settingsBackgroundNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView *{
@@ -95,14 +98,14 @@
     [settingsBackgroundNode setClipsToBounds:YES];
     
     
-    ASDisplayNode *locationSwitch = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
+    ASDisplayNode *locationSwitchNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
         self.locationSwitch = [[UISwitch alloc] init];
         [self.locationSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"DDFLocationDisabled"]];
         [self.locationSwitch setBackgroundColor:[UIColor clearColor]];
         [self.locationSwitch addTarget:self action:@selector(locationSwitchChanged) forControlEvents:UIControlEventValueChanged];
         return self.locationSwitch;
     }];
-    [locationSwitch setUserInteractionEnabled:YES];
+    [locationSwitchNode setUserInteractionEnabled:YES];
     
     ASTextNode *switchTextNode = [[ASTextNode alloc] init];
     [switchTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Disable & Hide Location" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0 weight:UIFontWeightRegular]}]];
@@ -114,6 +117,7 @@
     [settingsButtonNode setTitle:@"" withFont:[UIFont fontWithName:@"FontAwesome5ProLight" size:20.0] withColor:[UIColor fc_colorWithHexString:@"ff0066"] forState:UIControlStateNormal];
     [settingsButtonNode setTitle:@"" withFont:[UIFont fontWithName:@"FontAwesome5ProLight" size:20.0] withColor:[UIColor fc_colorWithHexString:@"ff3686"] forState:UIControlStateHighlighted];
     [settingsButtonNode addTarget:self action:@selector(presentSettings) forControlEvents:ASControlNodeEventTouchUpInside];
+    [settingsButtonNode setAccessibilityLabel:@"Open Settings"];
     
     __weak typeof(self) weakSelf = self;
     self.node.layoutSpecBlock = ^ASLayoutSpec *(ASDisplayNode *_Nonnull node, ASSizeRange constrainedSize) {
@@ -125,11 +129,11 @@
         [searchBackgroundNode.style setPreferredSize:CGSizeMake(44, 44)];
         [searchButtonNode.style setPreferredSize:CGSizeMake(44, 44)];
         
-        [locationSwitch.style setPreferredSize:CGSizeMake(50, 30)];
+        [locationSwitchNode.style setPreferredSize:CGSizeMake(50, 30)];
         [dividerNode.style setWidth:ASDimensionMake(1/[[UIScreen mainScreen] nativeScale])];
         [dividerNode.style setHeight:ASDimensionMake(44)];
         
-        ASStackLayoutSpec *locationSettingStackSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:8 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsCenter children:@[locationSwitch, switchTextNode]];
+        ASStackLayoutSpec *locationSettingStackSpec = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:8 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsCenter children:@[locationSwitchNode, switchTextNode]];
         
         ASInsetLayoutSpec *dividerInsetSpec = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 15, 0, 0) child:dividerNode];
         
@@ -264,7 +268,7 @@
             UserMapAnnotation *annotation = [UserMapAnnotation new];
             annotation.coordinate = CLLocationCoordinate2DMake(user.latitude, user.longitude);
             annotation.title = user.name;
-            annotation.subtitle = [NSString stringWithFormat:@"Last updated at %@", [[self dateFormatter] stringFromDate:user.updatedAt]];
+            annotation.subtitle = [NSString stringWithFormat:@"Last updated %@", [[user.updatedAt timeAgo] lowercaseString]];
             annotation.image = [self roundedRectImageFromImage:result.image size:CGSizeMake(30, 30) withCornerRadius:15];
             annotation.user = user;
             
@@ -323,6 +327,12 @@
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(calloutTapped:)];
     [view addGestureRecognizer:tapGesture];
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    if([view.gestureRecognizers count] != 0){
+        [view removeGestureRecognizer:view.gestureRecognizers[0]];
+    }
 }
 
 -(void)calloutTapped:(UITapGestureRecognizer *)sender {

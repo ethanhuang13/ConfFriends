@@ -13,6 +13,7 @@
 #import "PrivacyZoneViewController.h"
 #import "PrivacyViewController.h"
 #import "CountryViewController.h"
+#import "FuzzingViewController.h"
 
 @interface SettingsViewController () <ASTableDataSource, ASTableDelegate>
 
@@ -56,7 +57,7 @@
 
 - (NSInteger)tableNode:(ASTableNode *)tableNode numberOfRowsInSection:(NSInteger)section {
     if(section == 0) return 2;
-    if(section == 1) return 1;
+    if(section == 1) return 2;
     if(section == 2) return 1;
     if(section == 3) return 2;
     if(section == 4) return 4;
@@ -65,7 +66,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0) return @"Profile";
-    if(section == 1) return @"Privacy Zone";
+    if(section == 1) return @"Privacy";
     if(section == 2) return @"Location";
     if(section == 3) return @"Account Options";
     if(section == 4) return @"Misc";
@@ -82,10 +83,14 @@
                 [cell setText:@"Set Country"];
             }
         } else if(indexPath.section == 1){
-            if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFPrivacyZone"]){
-                [cell setText:@"Change/Remove Privacy Zone"];
-            } else {
-                [cell setText:@"Set Privacy Zone"];
+            if(indexPath.row == 0){
+                if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFPrivacyZone"]){
+                    [cell setText:@"Change/Remove Privacy Zone"];
+                } else {
+                    [cell setText:@"Set Privacy Zone"];
+                }
+            } else if(indexPath.row == 1){
+                [cell setText:@"Location Fuzzing"];
             }
         } else if(indexPath.section == 2){
             [cell setText:@"Change Location Accuracy"];
@@ -124,9 +129,15 @@
             [self presentViewController:navController animated:YES completion:nil];
         }
     } else if(indexPath.section == 1){
-        PrivacyZoneViewController *privacyZoneView = [[PrivacyZoneViewController alloc] init];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:privacyZoneView];
-        [self presentViewController:navController animated:YES completion:nil];
+        if(indexPath.row == 0){
+            PrivacyZoneViewController *privacyZoneView = [[PrivacyZoneViewController alloc] init];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:privacyZoneView];
+            [self presentViewController:navController animated:YES completion:nil];
+        } else {
+            FuzzingViewController *fuzzingView = [[FuzzingViewController alloc] init];
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:fuzzingView];
+            [self presentViewController:navController animated:YES completion:nil];
+        }
     } else if(indexPath.section == 2){
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         

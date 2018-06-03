@@ -37,6 +37,10 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
     [[UINavigationBar appearance] setTintColor:[UIColor fc_colorWithHexString:@"ff0066"]];
     [[UIWindow appearance] setTintColor:[UIColor fc_colorWithHexString:@"ff0066"]];
     [[UISearchBar appearance] setTintColor:[UIColor fc_colorWithHexString:@"ff0066"]];
+    [[UISegmentedControl appearance] setTintColor:[UIColor fc_colorWithHexString:@"ff0066"]];
+    [[UISwitch appearance] setOnTintColor:[UIColor fc_colorWithHexString:@"ff0066"]];
+    [[UISlider appearance] setTintColor:[UIColor fc_colorWithHexString:@"ff0066"]];
+
     
     [NSValueTransformer setValueTransformer:[DDFDateValueTransformer new] forName:kPlankDateValueTransformerKey];
     
@@ -86,6 +90,8 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
 }
 
 - (void)storeLocation:(CLLocation *)currentLocation {
+    CLLocation *location = currentLocation;
+    
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"DDFLocationDisabled"]) return;
 
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFPrivacyZone"]){
@@ -104,8 +110,30 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
         return;
     }
     
+    // Fuzz the location
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"DDFLocationFuzzingEnabled"]){
+        // Are we within the radius set?
+        NSInteger radius = [[NSUserDefaults standardUserDefaults] integerForKey:@"DDFLocationFuzzingRadius"];
+        CLLocationDistance distance = [location distanceFromLocation:[[CLLocation alloc] initWithLatitude:37.328979 longitude:-121.888955]];
+        if(distance > radius){
+            // Fluff
+            if(![[NSUserDefaults standardUserDefaults] integerForKey:@"DDFLocationFuzzingBearing"]){
+                NSInteger randomNumber = arc4random() % 359;
+
+                [[NSUserDefaults standardUserDefaults] setInteger:randomNumber forKey:@"DDFLocationFuzzingBearing"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            
+            NSInteger bearing = [[NSUserDefaults standardUserDefaults] integerForKey:@"DDFLocationFuzzingBearing"];
+            NSInteger distance = [[NSUserDefaults standardUserDefaults] integerForKey:@"DDFLocationFuzzingDistance"];
+            
+            CLLocationCoordinate2D coord = [self locationWithBearing:bearing distance:distance fromLocation:location.coordinate];
+            location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+        }
+    }
+    
     if([[[FIRAuth auth] currentUser] uid]){
-        [[[[[FIRDatabase database] reference] child:@"users"] child:[[[FIRAuth auth] currentUser] uid]] updateChildValues:@{@"latitude":@(currentLocation.coordinate.latitude), @"longitude":@(currentLocation.coordinate.longitude), @"updatedAt":@([[NSDate new] timeIntervalSince1970])}];
+        [[[[[FIRDatabase database] reference] child:@"users"] child:[[[FIRAuth auth] currentUser] uid]] updateChildValues:@{@"latitude":@(location.coordinate.latitude), @"longitude":@(location.coordinate.longitude), @"updatedAt":@([[NSDate new] timeIntervalSince1970])}];
     }
     
     self.lastLocationUpdateTime = [[NSDate date] timeIntervalSince1970];
@@ -132,6 +160,23 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [self stopLocationUpdates];
     [self fetchLocationChanges];
+}
+
+- (CLLocationCoordinate2D)locationWithBearing:(float)bearing distance:(float)distanceMeters fromLocation:(CLLocationCoordinate2D)origin {
+    CLLocationCoordinate2D target;
+    const double distRadians = distanceMeters / (6372797.6); // earth radius in meters
+    
+    float lat1 = origin.latitude * M_PI / 180;
+    float lon1 = origin.longitude * M_PI / 180;
+    
+    float lat2 = asin( sin(lat1) * cos(distRadians) + cos(lat1) * sin(distRadians) * cos(bearing));
+    float lon2 = lon1 + atan2( sin(bearing) * sin(distRadians) * cos(lat1),
+                              cos(distRadians) - sin(lat1) * sin(lat2) );
+    
+    target.latitude = lat2 * 180 / M_PI;
+    target.longitude = lon2 * 180 / M_PI; // no need to normalize a heading in degrees to be within -179.999999° to 180.00000°
+    
+    return target;
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {

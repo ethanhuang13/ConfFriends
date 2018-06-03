@@ -13,7 +13,6 @@
 
 @property (strong, nonatomic) ASDisplayNode *mapNode;
 @property (strong, nonatomic) MKMapView *mapView;
-@property (nonatomic) BOOL shownUserLocation;
 
 @end
 
@@ -26,7 +25,7 @@
     self.title = @"Privacy Zone";
     self.node.backgroundColor = [UIColor whiteColor];
     
-    NSString *descriptionString = @"Adding a Privacy Zone to ConfFriends will stop the app from sharing your location within the selected area shown in the map below. Move & scale the map to adjust the zone.";
+    NSString *descriptionString = @"Adding a Privacy Zone to ConfFriends will stop the app from sharing your location within the selected area shown in the map below. Move & scale the map to adjust the zone.\n\nPlease avoid centering the map over your home or hotel or other location so it doesn’t allow people to discover your location over time.";
     
     NSMutableAttributedString *descriptionAttributedString = [[NSMutableAttributedString alloc] initWithString:descriptionString attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}];
     

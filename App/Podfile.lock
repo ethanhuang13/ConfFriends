@@ -48,6 +48,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NSDate+TimeAgo (1.0.6)
   - PINCache (3.0.1-beta.6):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
     - PINCache/Core (= 3.0.1-beta.6)
@@ -80,6 +81,7 @@ DEPENDENCIES:
   - Firebase/Database
   - INTULocationManager
   - MBProgressHUD (~> 1.0)
+  - NSDate+TimeAgo
   - Texture (from `https://github.com/texturegroup/Texture.git`)
 
 EXTERNAL SOURCES:
@@ -112,11 +114,12 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NSDate+TimeAgo: 35601c619b2d59290055e4fe76e61d97677a2360
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: 5da1e84e3269e329268ef42eaa390f74741ab576
+PODFILE CHECKSUM: bdd9134677e74f573b0e4993315973c3f70e9e4d
 
 COCOAPODS: 1.4.0

@@ -14,5 +14,6 @@ pod 'Firebase/Database'
 pod 'INTULocationManager'
 pod 'MBProgressHUD', '~> 1.0'
 pod 'Texture', :git => 'https://github.com/texturegroup/Texture.git'
+pod 'NSDate+TimeAgo'
 
 end
