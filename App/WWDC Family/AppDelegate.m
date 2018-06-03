@@ -33,6 +33,9 @@ static const NSInteger MINUTES_STORAGE_THRESHHOLD = 1;
     
     [Fabric with:@[[Crashlytics class]]];
     
+    [FIRDatabase database].persistenceEnabled = YES;
+    [[[FIRDatabase database] referenceWithPath:@"users"] keepSynced:YES];
+    
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setTintColor:[UIColor fc_colorWithHexString:@"ff0066"]];
     [[UIWindow appearance] setTintColor:[UIColor fc_colorWithHexString:@"ff0066"]];

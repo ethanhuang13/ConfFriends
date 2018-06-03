@@ -676,8 +676,8 @@
 				94469053209552A90078878B /* Assets.xcassets */,
 				94469055209552A90078878B /* LaunchScreen.storyboard */,
 				94469058209552A90078878B /* Info.plist */,
-				94469059209552A90078878B /* main.m */,
 				941EAB2520AF47E900BF6D87 /* PrefixHeader.pch */,
+				94469059209552A90078878B /* main.m */,
 			);
 			path = "WWDC Family";
 			sourceTree = "<group>";
