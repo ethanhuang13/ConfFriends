@@ -14,6 +14,10 @@
 #import "PrivacyViewController.h"
 #import "CountryViewController.h"
 #import "FuzzingViewController.h"
+#import "FCTwitterAuthorization.h"
+#import "MBProgressHUD.h"
+#import "Archiver.h"
+#import "STTwitterAPI.h"
 
 @interface SettingsViewController () <ASTableDataSource, ASTableDelegate>
 
@@ -57,19 +61,27 @@
 
 - (NSInteger)tableNode:(ASTableNode *)tableNode numberOfRowsInSection:(NSInteger)section {
     if(section == 0) return 2;
-    if(section == 1) return 2;
-    if(section == 2) return 1;
-    if(section == 3) return 2;
-    if(section == 4) return 4;
+    if(section == 1){
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"DDFTwitterFriendFilter"]){
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+    if(section == 2) return 2;
+    if(section == 3) return 1;
+    if(section == 4) return 2;
+    if(section == 5) return 4;
     return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0) return @"Profile";
-    if(section == 1) return @"Privacy";
-    if(section == 2) return @"Location";
-    if(section == 3) return @"Account Options";
-    if(section == 4) return @"Misc";
+    if(section == 1) return @"Filter";
+    if(section == 2) return @"Privacy";
+    if(section == 3) return @"Location";
+    if(section == 4) return @"Account Options";
+    if(section == 5) return @"Misc";
     return @"";
 }
 
@@ -83,6 +95,20 @@
                 [cell setText:@"Set Country"];
             }
         } else if(indexPath.section == 1){
+            if([[NSUserDefaults standardUserDefaults] boolForKey:@"DDFTwitterFriendFilter"]){
+                if(indexPath.row == 0){
+                    [cell setText:@"Disable Twitter Following Filter"];
+                } else {
+                    [cell setText:@"Refresh Twitter Following List"];
+                }
+            } else {
+                if([Archiver retrieve:@"DDFTwitterFriends"]){
+                    [cell setText:@"Enable Twitter Following Filter"];
+                } else {
+                    [cell setText:@"Setup Twitter Following Filter"];
+                }
+            }
+        } else if(indexPath.section == 2){
             if(indexPath.row == 0){
                 if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFPrivacyZone"]){
                     [cell setText:@"Change/Remove Privacy Zone"];
@@ -92,9 +118,9 @@
             } else if(indexPath.row == 1){
                 [cell setText:@"Location Fuzzing"];
             }
-        } else if(indexPath.section == 2){
-            [cell setText:@"Change Location Accuracy"];
         } else if(indexPath.section == 3){
+            [cell setText:@"Change Location Accuracy"];
+        } else if(indexPath.section == 4){
             if(indexPath.row == 0){
                 [cell setText:@"Delete Account"];
             } else if(indexPath.row == 1){
@@ -129,6 +155,35 @@
             [self presentViewController:navController animated:YES completion:nil];
         }
     } else if(indexPath.section == 1){
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"DDFTwitterFriendFilter"]){
+            if(indexPath.row == 0){
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DDFTwitterFriendFilter"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"DDFFilterChanged" object:nil];
+                
+                [self.tableNode reloadData];
+            } else {
+                [self setupTwitterFilter];
+            }
+        } else {
+            if([Archiver retrieve:@"DDFTwitterFriends"]){
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DDFTwitterFriendFilter"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"DDFFilterChanged" object:nil];
+                
+                [self.tableNode reloadData];
+            } else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Setup Filter" message:@"The Twitter Following Filter will allow you to see only people you follow on Twitter that also use ConfFriends. We'll need to re-authenticate you to fetch your following list to store on the device.\n\nYou can disable/enable anytime once setup." preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"Setup" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self setupTwitterFilter];
+                }]];
+                [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+        }
+    } else if(indexPath.section == 2){
         if(indexPath.row == 0){
             PrivacyZoneViewController *privacyZoneView = [[PrivacyZoneViewController alloc] init];
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:privacyZoneView];
@@ -138,7 +193,7 @@
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:fuzzingView];
             [self presentViewController:navController animated:YES completion:nil];
         }
-    } else if(indexPath.section == 2){
+    } else if(indexPath.section == 3){
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         UIAlertController *alert;
@@ -176,13 +231,13 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
         
         [self presentViewController:alert animated:YES completion:nil];
-    } else if(indexPath.section == 3){
+    } else if(indexPath.section == 4){
         if(indexPath.row == 0){
             [self deleteUser];
         } else {
             [self signoutUser];
         }
-    } else if(indexPath.section == 4){
+    } else if(indexPath.section == 5){
         if(indexPath.row == 0){
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"About" message:@"Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly." preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"@ay8s on Twitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -285,7 +340,6 @@
 }
 
 - (void)presentNameAlert {
-    
     [[[[[FIRDatabase database] reference] child:@"users"] child:[[[FIRAuth auth] currentUser] uid]] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         if(snapshot.exists){
             DDFUser *user = [[DDFUser alloc] initWithModelDictionary:snapshot.value];
@@ -311,8 +365,51 @@
             [self presentViewController:alertController animated:YES completion:nil];
         }
     }];
-    
-    
+}
+
+- (void)setupTwitterFilter {
+    NSDictionary *twitterConfig = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TwitterService-Info" ofType:@"plist"]];
+
+    [FCTwitterAuthorization authorizeWithConsumerKey:[twitterConfig valueForKey:@"CONSUMER_KEY"] consumerSecret:[twitterConfig valueForKey:@"CONSUMER_SECRET"] callbackURLScheme:[twitterConfig valueForKey:@"URL_SCHEME"] completion:^(FCTwitterCredentials *credentials) {
+        if(credentials){
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showHUDAddedTo:self.node.view animated:YES];
+            });
+            
+            STTwitterAPI *twitter = [STTwitterAPI twitterAPIWithOAuthConsumerKey:[twitterConfig valueForKey:@"CONSUMER_KEY"] consumerSecret:[twitterConfig valueForKey:@"CONSUMER_SECRET"] oauthToken:credentials.token oauthTokenSecret:credentials.secret];
+            
+            [twitter getFriendsIDsForUserID:nil orScreenName:credentials.username cursor:nil count:@"5000" successBlock:^(NSArray *ids, NSString *previousCursor, NSString *nextCursor) {
+                
+                if([ids count] != 0){                    
+                    [Archiver persist:ids key:@"DDFTwitterFriends"];
+                    
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DDFTwitterFriendFilter"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"DDFFilterChanged" object:nil];
+                    
+                    [self.tableNode reloadData];
+                }
+                    
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.node.view animated:YES];
+                });
+            } errorBlock:^(NSError *error) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.node.view animated:YES];
+                });
+            }];
+        } else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"An error occured authenticating." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }];
 }
 
 - (void)presentPrivacyPolicy {

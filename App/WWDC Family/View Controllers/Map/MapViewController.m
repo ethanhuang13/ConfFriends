@@ -14,6 +14,7 @@
 #import "UsersViewController.h"
 #import "AppDelegate.h"
 #import "NSDate+TimeAgo.h"
+#import "Archiver.h"
 
 @interface MapViewController () <MKMapViewDelegate, UsersViewControllerDelegate>
 
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) NSMutableDictionary *userAnnotations;
 @property (strong, nonatomic) UISwitch *locationSwitch;
+@property (strong, nonatomic) NSArray *twitterFriends;
 
 @end
 
@@ -188,14 +190,7 @@
     
     [self addStatusBarBlurBackground];
     
-    // User Added
-    [[[[FIRDatabase database] reference] child:@"users"] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        if(snapshot.exists){
-            NSMutableDictionary *user = [snapshot.value mutableCopy];
-            [user addEntriesFromDictionary:@{@"id":snapshot.key}];
-            [self addUserMarker:[[DDFUser alloc] initWithModelDictionary:user]];
-        }
-    }];
+    [self fetchUsers];
     
     // User Changed (Could be that lat/long has also been removed to hide location)
     [[[[FIRDatabase database] reference] child:@"users"] observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -229,6 +224,24 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLocationToggle) name:@"DDFOnboardingCompleted" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchUsers) name:@"DDFFilterChanged" object:nil];
+}
+
+- (void)fetchUsers {
+    self.twitterFriends = [Archiver retrieve:@"DDFTwitterFriends"];
+    
+    self.userAnnotations = [NSMutableDictionary new];
+    
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    
+    // User Added
+    [[[[FIRDatabase database] reference] child:@"users"] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        if(snapshot.exists){
+            NSMutableDictionary *user = [snapshot.value mutableCopy];
+            [user addEntriesFromDictionary:@{@"id":snapshot.key}];
+            [self addUserMarker:[[DDFUser alloc] initWithModelDictionary:user]];
+        }
+    }];
 }
 
 #pragma mark - San Jose Region
@@ -261,6 +274,11 @@
 - (void)addUserMarker:(DDFUser *)user {
     if([self.userAnnotations objectForKey:user.identifier]) return;
     if(!user.latitude || !user.longitude || !user.avatar) return;
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"DDFTwitterFriendFilter"]){
+        if(![self.twitterFriends containsObject:user.twitterID]) return;
+    }
+    
     
     [[PINRemoteImageManager sharedImageManager] downloadImageWithURL:user.avatar options:PINRemoteImageManagerDownloadOptionsNone processorKey:@"wwdcfamily" processor:^UIImage * _Nullable(PINRemoteImageManagerResult * _Nonnull result, NSUInteger * _Nonnull cost) {
         return result.image;
