@@ -292,6 +292,7 @@
 /* Begin PBXFileReference section */
 		55BB4C6525E775E1B5B48FB8 /* Pods-WWDC Family.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WWDC Family.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WWDC Family/Pods-WWDC Family.debug.xcconfig"; sourceTree = "<group>"; };
 		6C0B733C213E8096007EAE7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6C0B733E213E80EC007EAE7D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		941EAB2220AF462900BF6D87 /* UsersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsersViewController.h; sourceTree = "<group>"; };
 		941EAB2320AF462900BF6D87 /* UsersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsersViewController.m; sourceTree = "<group>"; };
 		941EAB2520AF47E900BF6D87 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -1097,6 +1098,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = 9446903E209552A80078878B;
 			productRefGroup = 94469048209552A80078878B /* Products */;
@@ -1502,6 +1504,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6C0B733C213E8096007EAE7D /* en */,
+				6C0B733E213E80EC007EAE7D /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

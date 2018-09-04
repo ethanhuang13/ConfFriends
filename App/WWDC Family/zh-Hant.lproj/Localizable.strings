@@ -1,0 +1,106 @@
+/* 
+  Localizable.strings
+  WWDC Family
+
+  Created by ethanhuang13 on 2018/9/4.
+  Copyright © 2018年 AndyDev. All rights reserved.
+*/
+
+// General
+"general.whoops" = "唉呀";
+"general.gotIt" = "知道了";
+"general.setup" = "設定";
+"general.save" = "儲存";
+"general.cancel" = "取消";
+"general.close" = "關閉";
+
+// AuthViewController
+"authVC.welcome" = "歡迎使用\nConfFriends";
+"authVC.findHappeningSpots" = "研討會期間發現人們集中在哪些熱點。";
+"authVC.meetNewPeople" = "認識新朋友。點選頭像，即可透過 Twitter 來聯絡。";
+"authVC.disableAndHide" = "在地圖畫面，隨時可關閉並隱藏你的所在地點。";
+"authVC.adjustLocationAccuracy" = "根據你的需要調整地點準確度，以減少使用的電力。";
+"authVC.signInWithTwitter" = "使用 Twitter 登入";
+"authVC.bySigningIn" = "一旦登入即表示你同意我們的隱私權政策";
+
+"authVC.alert.twitterIDMissing.message" = "缺少你的 Twitter ID，請再次嘗試登入。";
+"authVC.alert.twitterDisplayNameMissing.message" = "缺少你的 Twitter 顯示名稱，請再次嘗試登入。";
+"authVC.alert.twitterUsername.message" = "缺少你的 Twitter 帳號，請再次嘗試登入。";
+"authVC.alert.locationSharing" = "分享地點";
+"authVC.alert.locationSharing.message" = "ConfFriends 會分享你的所在地點給其他 ConfFriends 使用者。如果你只是想分享給朋友，我們建議你使用「尋找我的朋友」。\n\n如果你不想分享所在地點的話，還是可以繼續使用 ConfFriends。";
+"authVC.alert.locationSharing.share" = "分享我的地點";
+"authVC.alert.locationSharing.dontShare" = "不要分享我的地點";
+"authVC.alert.otherError.message" = "登入時發生錯誤。";
+
+// MapViewController
+"mapVC.locationSwitch" = "關閉 & 隱藏地點";
+
+// UsersViewController
+"usersVC.title" = "使用者";
+"usersVC.all" = "全部";
+"usersVC.alert.userNotSharing.message" = "這位使用者目前沒有分享地點。";
+"usersVC.viewOnTwitter" = "在 Twitter 顯示";
+
+// SettingsViewController
+"settingsVC.title" = "設定";
+
+"settingsVC.header.profile" = "個人檔案";
+"settingsVC.header.filter" = "過濾功能";
+"settingsVC.header.privacy" = "隱私";
+"settingsVC.header.location" = "地區";
+"settingsVC.header.accountOptions" = "帳號選項";
+"settingsVC.header.misc" = "其他";
+
+"settingsVC.cell.changeName" = "修改名稱";
+"settingsVC.cell.setCountry" = "設定地區";
+"settingsVC.cell.disableTwitterFollowingFilter" = "關閉 Twitter 正在跟隨過濾功能";
+"settingsVC.cell.refreshTwitterFollowingList" = "更新 Twitter 正在跟隨的人";
+"settingsVC.cell.enableTwitterFollowingFilter" = "開啟 Twitter 正在跟隨過濾功能";
+"settingsVC.cell.setupTwitterFollowingFilter" = "設定 Twitter 正在跟隨過濾功能";
+"settingsVC.cell.changeRemovePrivacyZone" = "修改/移除隱私區域";
+"settingsVC.cell.setPrivacyZone" = "設定隱私區域";
+"settingsVC.cell.locationFuzzing" = "位置模糊化";
+"settingsVC.cell.changeLocationAccuracy" = "改變定位準確度";
+"settingsVC.cell.deleteAccount" = "刪除帳號";
+"settingsVC.cell.signOut" = "登出";
+"settingsVC.cell.aboutConfFriends" = "關於 ConfFriends";
+"settingsVC.cell.sendFeedback" = "傳送回饋";
+"settingsVC.cell.shareConfFriends" = "分享 ConfFriends";
+"settingsVC.cell.privacyPolicy" = "隱私權政策";
+
+"settingsVC.alert.changeName" = "修改名稱";
+"settingsVC.alert.changeName.message" = "";
+"settingsVC.alert.changeName.placeHolder" = "名稱";
+"settingsVC.alert.setupFilter" = "設定過濾功能";
+"settingsVC.alert.setupFilter.message" = "「正在跟隨過濾功能」會只允許你正在 Twitter 上跟隨、而且也是 ConfFriends 的使用者看得到你的所在地點。我們需要重新要求授權，來取得你正在跟隨的人，並保存在裝置上。\n\n設定之後你隨時可以關閉/開啟這項功能。";
+"settingsVC.alert.locationAccuracy" = "位置準確度";
+"settingsVC.alert.locationAccuracy.message" = "選擇位置準確度，越準確會越耗電。";
+"settingsVC.alert.locationAccuracy.5meters" = "5 公尺或更佳";
+"settingsVC.alert.locationAccuracy.15meters" = "15 公尺或更佳";
+"settingsVC.alert.locationAccuracy.100meters" = "100 公尺或更佳";
+"settingsVC.alert.locationAccuracy.1000meters" = "1000 公尺或更佳";
+"settingsVC.alert.locationAccuracy.5000meters" = "5000 公尺或更佳";
+"settingsVC.alert.about" = "關於";
+"settingsVC.alert.about.message" = "Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly.";
+
+// FuzzingViewController
+"fuzzingVC.title" = "位置模糊化";
+"fuzzingVC.description" = "當你不在 WWDC 附近時，位置模糊化會故意偏移你的所在位置。";
+"fuzzingVC.enableLocationFuzzing" = "開啟位置模糊化";
+"fuzzingVC.adjustRadius" = "用下方的拉桿來調整半徑，半徑內的區域不會模糊化。";
+"fuzzingVC.fluffDistance" = "偏移距離";
+"fuzzingVC.theDistanceThat" = "位於半徑區域以外時，你的定位會被偏移的程度。";
+"fuzzingVC.100m" = "100 m";
+"fuzzingVC.250m" = "250 m";
+"fuzzingVC.500m" = "500 m";
+"fuzzingVC.1000m" = "1000 m";
+"fuzzingVC.2000m" = "2000 m";
+
+// PrivacyZoneViewController
+"privacyZoneVC.title" = "隱私區域";
+"privacyZoneVC.description" = "ConfFriends 會在隱私區域停止分享你的位置。在下方的地圖移動與放大縮小來調整區域範圍。\n\n請避免將你的住處、飯店等地方設定為區域的中心點，以免隨著時間人們能發現你的真實地點。";
+"privacyZoneVC.setPrivacyZone" = "設定隱私區域";
+"privacyZoneVC.deleteZone" = "刪除隱私區域";
+
+// CountryViewController
+"countryVC.title" = "設定地區";
