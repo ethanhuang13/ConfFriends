@@ -56,7 +56,7 @@
 #pragma mark - Table Data Source
 
 - (NSInteger)numberOfSectionsInTableNode:(ASTableNode *)tableNode {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableNode:(ASTableNode *)tableNode numberOfRowsInSection:(NSInteger)section {
