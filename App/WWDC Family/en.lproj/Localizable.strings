@@ -22,6 +22,7 @@
 "authVC.adjustLocationAccuracy" = "Adjust location accuracy to minimise battery usage when it suits you.";
 "authVC.signInWithTwitter" = "Sign in with Twitter";
 "authVC.bySigningIn" = "By signing in you agree to our Privacy Policy.";
+"authVC.privacyPolicy" = "Privacy Policy";
 
 "authVC.alert.twitterIDMissing.message" = "Your Twitter ID is missing, please try signing in again.";
 "authVC.alert.twitterDisplayNameMissing.message" = "Your Twitter display name is missing, please try signing in again.";

@@ -78,7 +78,7 @@
     ASTextNode *privacyTextNode = [ASTextNode new];
     NSString *privacyString = NSLocalizedString(@"authVC.bySigningIn", @"By signing in you agree to our Privacy Policy.");
     NSMutableAttributedString *privacyAttributedString = [[NSMutableAttributedString alloc] initWithString:privacyString attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.5]}];
-    [privacyAttributedString addAttributes:@{NSForegroundColorAttributeName:[UIColor fc_colorWithHexString:@"ff0066"]} range:[privacyString rangeOfString:NSLocalizedString(@"", @"Privacy Policy")]];
+    [privacyAttributedString addAttributes:@{NSForegroundColorAttributeName:[UIColor fc_colorWithHexString:@"ff0066"]} range:[privacyString rangeOfString:NSLocalizedString(@"authVC.privacyPolicy", @"Privacy Policy")]];
     [privacyTextNode setAttributedText:privacyAttributedString];
     [privacyTextNode setUserInteractionEnabled:YES];
     [privacyTextNode addTarget:self action:@selector(presentPrivacyPolicy) forControlEvents:ASControlNodeEventTouchUpInside];

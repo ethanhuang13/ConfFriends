@@ -22,6 +22,7 @@
 "authVC.adjustLocationAccuracy" = "根據你的需要調整地點準確度，以減少使用的電力。";
 "authVC.signInWithTwitter" = "使用 Twitter 登入";
 "authVC.bySigningIn" = "一旦登入即表示你同意我們的隱私權政策";
+"authVC.privacyPolicy" = "隱私權政策";
 
 "authVC.alert.twitterIDMissing.message" = "缺少你的 Twitter ID，請再次嘗試登入。";
 "authVC.alert.twitterDisplayNameMissing.message" = "缺少你的 Twitter 顯示名稱，請再次嘗試登入。";
