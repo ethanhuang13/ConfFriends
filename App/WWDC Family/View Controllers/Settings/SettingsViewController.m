@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import <SafariServices/SFSafariViewController.h>
 #import "PrivacyZoneViewController.h"
-#import "PrivacyViewController.h"
 #import "CountryViewController.h"
 #import "FuzzingViewController.h"
 #import "FCTwitterAuthorization.h"
@@ -411,13 +410,6 @@
         }
     }];
 }
-
-- (void)presentPrivacyPolicy {
-    PrivacyViewController *privacyView = [[PrivacyViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:privacyView];
-    [self presentViewController:navController animated:YES completion:nil];
-}
-
 
 - (void)dismissView {
     [self dismissViewControllerAnimated:YES completion:nil];
