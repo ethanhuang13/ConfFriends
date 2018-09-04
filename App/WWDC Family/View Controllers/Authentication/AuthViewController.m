@@ -9,8 +9,8 @@
 #import "AuthViewController.h"
 #import "FCTwitterAuthorization.h"
 #import "AppDelegate.h"
-#import "PrivacyViewController.h"
 #import "MBProgressHUD.h"
+#import <SafariServices/SFSafariViewController.h>
 
 @interface AuthViewController ()
 
@@ -224,9 +224,8 @@
 }
 
 - (void)presentPrivacyPolicy {
-    PrivacyViewController *privacyView = [[PrivacyViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:privacyView];
-    [self presentViewController:navController animated:YES completion:nil];
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:@"https://wwdc.family/privacy.html"]];
+    [self presentViewController:safariVC animated:YES completion:nil];
 }
 
 @end
