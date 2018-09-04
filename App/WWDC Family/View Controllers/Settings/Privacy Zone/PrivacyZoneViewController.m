@@ -22,10 +22,10 @@
     if (!(self = [super initWithNode:[[ASDisplayNode alloc] init]]))
         return nil;
     
-    self.title = @"Privacy Zone";
+    self.title = NSLocalizedString(@"privacyZoneVC.title", @"Privacy Zone");
     self.node.backgroundColor = [UIColor whiteColor];
     
-    NSString *descriptionString = @"Adding a Privacy Zone to ConfFriends will stop the app from sharing your location within the selected area shown in the map below. Move & scale the map to adjust the zone.\n\nPlease avoid centering the map over your home or hotel or other location so it doesn’t allow people to discover your location over time.";
+    NSString *descriptionString = NSLocalizedString(@"privacyZoneVC.description", @"Adding a Privacy Zone to ConfFriends will stop the app from sharing your location within the selected area shown in the map below. Move & scale the map to adjust the zone.\n\nPlease avoid centering the map over your home or hotel or other location so it doesn’t allow people to discover your location over time.");
     
     NSMutableAttributedString *descriptionAttributedString = [[NSMutableAttributedString alloc] initWithString:descriptionString attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}];
     
@@ -63,7 +63,7 @@
     self.mapNode.cornerRadius = 8.0;
     
     ASButtonNode *nextButton = [ASButtonNode new];
-    [nextButton setTitle:@"Set Privacy Zone" withFont:[UIFont systemFontOfSize:14.0 weight:UIFontWeightSemibold] withColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [nextButton setTitle:NSLocalizedString(@"privacyZoneVC.setPrivacyZone", @"Set Privacy Zone") withFont:[UIFont systemFontOfSize:14.0 weight:UIFontWeightSemibold] withColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [nextButton setBackgroundImage:[UIImage fc_solidColorImageWithSize:CGSizeMake(1, 1) color:[UIColor fc_colorWithHexString:@"ff0066"]] forState:UIControlStateNormal];
     [nextButton setBackgroundImage:[UIImage fc_solidColorImageWithSize:CGSizeMake(1, 1) color:[UIColor fc_colorWithHexString:@"ff3686"]] forState:UIControlStateHighlighted];
     [nextButton addTarget:self action:@selector(saveZone) forControlEvents:ASControlNodeEventTouchUpInside];
@@ -77,7 +77,7 @@
     [nextButton setCornerRadius:4];
 
     
-    NSAttributedString *deleteString = [[NSAttributedString alloc] initWithString:@"Delete Zone" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
+    NSAttributedString *deleteString = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"privacyZoneVC.deleteZone", @"Delete Zone") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
     ASTextNode *deleteNode = [ASTextNode new];
     [deleteNode setAttributedText:deleteString];
     [deleteNode addTarget:self action:@selector(deleteZone) forControlEvents:ASControlNodeEventTouchUpInside];
@@ -110,7 +110,7 @@
     
     [self.node setAutomaticallyManagesSubnodes:YES];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"general.close", @"Close") style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
     
     return self;
 }

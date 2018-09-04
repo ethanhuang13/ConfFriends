@@ -27,7 +27,7 @@
     if (!(self = [super initWithNode:tableNode]))
         return nil;
     
-    self.title = @"Users";
+    self.title = NSLocalizedString(@"usersVC.title", @"Users");
     self.previousSearch = @"";
     
     [self.node setBackgroundColor:[UIColor fc_colorWithHexString:@"#f7f7f7"]];
@@ -46,13 +46,13 @@
     self.navigationItem.searchController = searchController;
     self.navigationItem.hidesSearchBarWhenScrolling = NO;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"general.close", @"Close") style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFUserCountry"]){
-        UISegmentedControl *userFilterControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"All", [[NSUserDefaults standardUserDefaults] valueForKey:@"DDFUserCountry"], nil]];
+        UISegmentedControl *userFilterControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NSLocalizedString(@"usersVC.all", @"All"), [[NSUserDefaults standardUserDefaults] valueForKey:@"DDFUserCountry"], nil]];
         [userFilterControl addTarget:self action:@selector(userFilterControlValueChanged:) forControlEvents:UIControlEventValueChanged];
         [userFilterControl setSelectedSegmentIndex:0];
         self.navigationItem.titleView = userFilterControl;
@@ -207,11 +207,11 @@
             }
         }];
     } else {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"This user doesn't currently have a location shared." preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"View on Twitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"general.whoops", @"Whoops") message:NSLocalizedString(@"usersVC.alert.userNotSharing.message", @"This user doesn't currently have a location shared.") preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"usersVC.viewOnTwitter", @"View on Twitter") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self openUsersTwitter:user];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.cancel", @"Cancel") style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }
 }

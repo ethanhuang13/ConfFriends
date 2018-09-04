@@ -21,7 +21,7 @@
     if (!(self = [super initWithNode:tableNode]))
         return nil;
     
-    self.title = @"Set Country";
+    self.title = NSLocalizedString(@"countryVC.title", @"Set Country");
     
     [self.node setBackgroundColor:[UIColor fc_colorWithHexString:@"#f7f7f7"]];
     [self.node setAutomaticallyManagesSubnodes:YES];
@@ -31,7 +31,7 @@
     self.tableNode.dataSource = self;
     self.tableNode.displaysAsynchronously = NO;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"general.close", @"Close") style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];

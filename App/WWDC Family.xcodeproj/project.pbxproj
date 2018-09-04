@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C0B733B213E8096007EAE7D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6C0B733D213E8096007EAE7D /* Localizable.strings */; };
 		941EAB2420AF462900BF6D87 /* UsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941EAB2320AF462900BF6D87 /* UsersViewController.m */; };
 		941EAB2820AF576500BF6D87 /* UserCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 941EAB2720AF576500BF6D87 /* UserCellNode.m */; };
 		941EAB3220AF744400BF6D87 /* fa-light-300.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 941EAB3120AF744400BF6D87 /* fa-light-300.ttf */; };
@@ -290,6 +291,7 @@
 
 /* Begin PBXFileReference section */
 		55BB4C6525E775E1B5B48FB8 /* Pods-WWDC Family.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WWDC Family.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WWDC Family/Pods-WWDC Family.debug.xcconfig"; sourceTree = "<group>"; };
+		6C0B733C213E8096007EAE7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		941EAB2220AF462900BF6D87 /* UsersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsersViewController.h; sourceTree = "<group>"; };
 		941EAB2320AF462900BF6D87 /* UsersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsersViewController.m; sourceTree = "<group>"; };
 		941EAB2520AF47E900BF6D87 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -677,6 +679,7 @@
 				94469055209552A90078878B /* LaunchScreen.storyboard */,
 				94469058209552A90078878B /* Info.plist */,
 				941EAB2520AF47E900BF6D87 /* PrefixHeader.pch */,
+				6C0B733D213E8096007EAE7D /* Localizable.strings */,
 				94469059209552A90078878B /* main.m */,
 			);
 			path = "WWDC Family";
@@ -1132,6 +1135,7 @@
 				9456B24420C0B85600922DCE /* BH.png in Resources */,
 				9456B1E520C0B85600922DCE /* TL.png in Resources */,
 				9456B1F520C0B85600922DCE /* HR.png in Resources */,
+				6C0B733B213E8096007EAE7D /* Localizable.strings in Resources */,
 				9456B20120C0B85600922DCE /* SB.png in Resources */,
 				9456B26820C0B85600922DCE /* LC.png in Resources */,
 				9456B24020C0B85600922DCE /* OM.png in Resources */,
@@ -1494,6 +1498,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6C0B733D213E8096007EAE7D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6C0B733C213E8096007EAE7D /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		94469055209552A90078878B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
