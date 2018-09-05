@@ -12,7 +12,6 @@
 		941EAB3220AF744400BF6D87 /* fa-light-300.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 941EAB3120AF744400BF6D87 /* fa-light-300.ttf */; };
 		942D69A320AD03CE003D944F /* PrivacyZoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942D69A220AD03CE003D944F /* PrivacyZoneViewController.m */; };
 		942D69A620AD0C93003D944F /* NSUserDefaults+MKMapRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 942D69A520AD0C93003D944F /* NSUserDefaults+MKMapRect.m */; };
-		942D69AA20AE2942003D944F /* PrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942D69A920AE2942003D944F /* PrivacyViewController.m */; };
 		944303CA20B7AB6A00F5AB38 /* TwitterService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 944303C920B7AB6A00F5AB38 /* TwitterService-Info.plist */; };
 		9446904C209552A80078878B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9446904B209552A80078878B /* AppDelegate.m */; };
 		94469054209552A90078878B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94469053209552A90078878B /* Assets.xcassets */; };
@@ -300,8 +299,6 @@
 		942D69A220AD03CE003D944F /* PrivacyZoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivacyZoneViewController.m; sourceTree = "<group>"; };
 		942D69A420AD0C93003D944F /* NSUserDefaults+MKMapRect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+MKMapRect.h"; sourceTree = "<group>"; };
 		942D69A520AD0C93003D944F /* NSUserDefaults+MKMapRect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+MKMapRect.m"; sourceTree = "<group>"; };
-		942D69A820AE2942003D944F /* PrivacyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivacyViewController.h; sourceTree = "<group>"; };
-		942D69A920AE2942003D944F /* PrivacyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivacyViewController.m; sourceTree = "<group>"; };
 		944303C920B7AB6A00F5AB38 /* TwitterService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TwitterService-Info.plist"; sourceTree = "<group>"; };
 		94469047209552A80078878B /* WWDC Family.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WWDC Family.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9446904A209552A80078878B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -631,15 +628,6 @@
 				942D69A220AD03CE003D944F /* PrivacyZoneViewController.m */,
 			);
 			path = "Privacy Zone";
-			sourceTree = "<group>";
-		};
-		942D69A720AE2933003D944F /* Privacy */ = {
-			isa = PBXGroup;
-			children = (
-				942D69A820AE2942003D944F /* PrivacyViewController.h */,
-				942D69A920AE2942003D944F /* PrivacyViewController.m */,
-			);
-			path = Privacy;
 			sourceTree = "<group>";
 		};
 		9446903E209552A80078878B = {
@@ -1026,7 +1014,6 @@
 				949B1D2820A782E20006E6D5 /* SettingsViewController.m */,
 				9456B27C20C1D33800922DCE /* Fuzzing */,
 				9456B07720C0B20D00922DCE /* Country */,
-				942D69A720AE2933003D944F /* Privacy */,
 				942D69A020ACFE0D003D944F /* Privacy Zone */,
 			);
 			path = Settings;
@@ -1473,7 +1460,6 @@
 				9446905A209552A90078878B /* main.m in Sources */,
 				94469065209553770078878B /* AuthViewController.m in Sources */,
 				949B1D2320A772E80006E6D5 /* UIViewController+StatusBarBackground.m in Sources */,
-				942D69AA20AE2942003D944F /* PrivacyViewController.m in Sources */,
 				949B1D2920A782E20006E6D5 /* SettingsViewController.m in Sources */,
 				9456B07A20C0B22D00922DCE /* CountryViewController.m in Sources */,
 				942D69A620AD0C93003D944F /* NSUserDefaults+MKMapRect.m in Sources */,
