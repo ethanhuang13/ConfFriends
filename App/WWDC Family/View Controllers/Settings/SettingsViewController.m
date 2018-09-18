@@ -31,7 +31,7 @@
     if (!(self = [super initWithNode:tableNode]))
         return nil;
     
-    self.title = @"Settings";
+    self.title = NSLocalizedString(@"settingsVC.title", @"Settings");
     
     [self.node setBackgroundColor:[UIColor fc_colorWithHexString:@"#f7f7f7"]];
     [self.node setAutomaticallyManagesSubnodes:YES];
@@ -41,7 +41,7 @@
     self.tableNode.dataSource = self;
     [self.tableNode.view setSeparatorInset:UIEdgeInsetsMake(0, 16, 0, 0)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"general.close", @"Close") style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
     
     return self;
 }
@@ -75,12 +75,12 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if(section == 0) return @"Profile";
-    if(section == 1) return @"Filter";
-    if(section == 2) return @"Privacy";
-    if(section == 3) return @"Location";
-    if(section == 4) return @"Account Options";
-    if(section == 5) return @"Misc";
+    if(section == 0) return NSLocalizedString(@"settingsVC.header.profile", @"Profile");
+    if(section == 1) return NSLocalizedString(@"settingsVC.header.filter", @"Filter");
+    if(section == 2) return NSLocalizedString(@"settingsVC.header.privacy", @"Privacy");
+    if(section == 3) return NSLocalizedString(@"settingsVC.header.location", @"Location");
+    if(section == 4) return NSLocalizedString(@"settingsVC.header.accountOptions", @"Account Options");
+    if(section == 5) return NSLocalizedString(@"settingsVC.header.misc", @"Misc");
     return @"";
 }
 
@@ -89,51 +89,51 @@
         ASTextCellNode *cell = [[ASTextCellNode alloc] init];
         if(indexPath.section == 0){
             if(indexPath.row == 0){
-                [cell setText:@"Change Name"];
+                [cell setText:NSLocalizedString(@"settingsVC.cell.changeName", @"Change Name")];
             } else if(indexPath.row == 1){
-                [cell setText:@"Set Country"];
+                [cell setText:NSLocalizedString(@"settingsVC.cell.setCountry", @"Set Country")];
             }
         } else if(indexPath.section == 1){
             if([[NSUserDefaults standardUserDefaults] boolForKey:@"DDFTwitterFriendFilter"]){
                 if(indexPath.row == 0){
-                    [cell setText:@"Disable Twitter Following Filter"];
+                    [cell setText:NSLocalizedString(@"settingsVC.cell.disableTwitterFollowingFilter", @"Disable Twitter Following Filter")];
                 } else {
-                    [cell setText:@"Refresh Twitter Following List"];
+                    [cell setText:NSLocalizedString(@"settingsVC.cell.refreshTwitterFollowingList", @"Refresh Twitter Following List")];
                 }
             } else {
                 if([Archiver retrieve:@"DDFTwitterFriends"]){
-                    [cell setText:@"Enable Twitter Following Filter"];
+                    [cell setText:NSLocalizedString(@"settingsVC.cell.enableTwitterFollowingFilter", @"Enable Twitter Following Filter")];
                 } else {
-                    [cell setText:@"Setup Twitter Following Filter"];
+                    [cell setText:NSLocalizedString(@"settingsVC.cell.setupTwitterFollowingFilter", @"Setup Twitter Following Filter")];
                 }
             }
         } else if(indexPath.section == 2){
             if(indexPath.row == 0){
                 if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFPrivacyZone"]){
-                    [cell setText:@"Change/Remove Privacy Zone"];
+                    [cell setText:NSLocalizedString(@"settingsVC.cell.changeRemovePrivacyZone", @"Change/Remove Privacy Zone")];
                 } else {
-                    [cell setText:@"Set Privacy Zone"];
+                    [cell setText:NSLocalizedString(@"settingsVC.cell.setPrivacyZone", @"Set Privacy Zone")];
                 }
             } else if(indexPath.row == 1){
-                [cell setText:@"Location Fuzzing"];
+                [cell setText:NSLocalizedString(@"settingsVC.cell.locationFuzzing", @"Location Fuzzing")];
             }
         } else if(indexPath.section == 3){
-            [cell setText:@"Change Location Accuracy"];
+            [cell setText:NSLocalizedString(@"settingsVC.cell.changeLocationAccuracy", @"Change Location Accuracy")];
         } else if(indexPath.section == 4){
             if(indexPath.row == 0){
-                [cell setText:@"Delete Account"];
+                [cell setText:NSLocalizedString(@"settingsVC.cell.deleteAccount", @"Delete Account")];
             } else if(indexPath.row == 1){
-                [cell setText:@"Signout"];
+                [cell setText:NSLocalizedString(@"settingsVC.cell.signOut", @"Sign Out")];
             }
         } else {
             if(indexPath.row == 0){
-                [cell setText:@"About ConfFriends"];
+                [cell setText:NSLocalizedString(@"settingsVC.cell.aboutConfFriends", @"About ConfFriends")];
             } else if(indexPath.row == 1){
-                [cell setText:@"Send Feedback"];
+                [cell setText:NSLocalizedString(@"settingsVC.cell.sendFeedback", @"Send Feedback")];
             } else if(indexPath.row == 2){
-                [cell setText:@"Share ConfFriends"];
+                [cell setText:NSLocalizedString(@"settingsVC.cell.shareConfFriends", @"Share ConfFriends")];
             } else if(indexPath.row == 3){
-                [cell setText:@"Privacy Policy"];
+                [cell setText:NSLocalizedString(@"settingsVC.cell.privacyPolicy", @"Privacy Policy")];
             }
         }
         [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
@@ -174,11 +174,11 @@
                 
                 [self.tableNode reloadData];
             } else {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Setup Filter" message:@"The Twitter Following Filter will allow you to see only people you follow on Twitter that also use ConfFriends. We'll need to re-authenticate you to fetch your following list to store on the device.\n\nYou can disable/enable anytime once setup." preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"Setup" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"settingsVC.alert.setupFilter", @"Setup Filter") message:NSLocalizedString(@"settingsVC.alert.setupFilter.message", @"The Twitter Following Filter will allow you to see only people you follow on Twitter that also use ConfFriends. We'll need to re-authenticate you to fetch your following list to store on the device.\n\nYou can disable/enable anytime once setup.") preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.setup", @"Setup") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [self setupTwitterFilter];
                 }]];
-                [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+                [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.cancel", @"Cancel") style:UIAlertActionStyleCancel handler:nil]];
                 [self presentViewController:alert animated:YES completion:nil];
             }
         }
@@ -197,37 +197,37 @@
         
         UIAlertController *alert;
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-            alert = [UIAlertController alertControllerWithTitle:@"Location Accuracy" message:@"Select a location accuracy, higher accuracy options will use more power." preferredStyle:UIAlertControllerStyleAlert];
+            alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"settingsVC.alert.locationAccuracy", @"Location Accuracy") message:NSLocalizedString(@"settingsVC.alert.locationAccuracy.message", @"Select a location accuracy, higher accuracy options will use more power.") preferredStyle:UIAlertControllerStyleAlert];
         } else {
-            alert = [UIAlertController alertControllerWithTitle:@"Location Accuracy" message:@"Select a location accuracy, higher accuracy options will use more power." preferredStyle:UIAlertControllerStyleActionSheet];
+            alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"settingsVC.alert.locationAccuracy", @"Location Accuracy") message:NSLocalizedString(@"settingsVC.alert.locationAccuracy.message", @"Select a location accuracy, higher accuracy options will use more power.") preferredStyle:UIAlertControllerStyleActionSheet];
         }
             
-        [alert addAction:[UIAlertAction actionWithTitle:@"5 meters or better" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"settingsVC.alert.locationAccuracy.5meters", @"5 meters or better") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[NSUserDefaults standardUserDefaults] setValue:@(INTULocationAccuracyRoom) forKey:@"DDFAccuracy"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [appDelegate resetLocationUpdates];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"15 meters or better" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"settingsVC.alert.locationAccuracy.15meters", @"15 meters or better") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[NSUserDefaults standardUserDefaults] setValue:@(INTULocationAccuracyHouse) forKey:@"DDFAccuracy"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [appDelegate resetLocationUpdates];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"100 meters or better" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"settingsVC.alert.locationAccuracy.100meters", @"100 meters or better") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[NSUserDefaults standardUserDefaults] setValue:@(INTULocationAccuracyBlock) forKey:@"DDFAccuracy"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [appDelegate resetLocationUpdates];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"1000 meters or better" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"settingsVC.alert.locationAccuracy.1000meters", @"1000 meters or better") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[NSUserDefaults standardUserDefaults] setValue:@(INTULocationAccuracyNeighborhood) forKey:@"DDFAccuracy"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [appDelegate resetLocationUpdates];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"5000 Meters or better" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"settingsVC.alert.locationAccuracy.5000meters", @"5000 Meters or better") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[NSUserDefaults standardUserDefaults] setValue:@(INTULocationAccuracyCity) forKey:@"DDFAccuracy"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [appDelegate resetLocationUpdates];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.cancel", @"Cancel") style:UIAlertActionStyleCancel handler:nil]];
         
         [self presentViewController:alert animated:YES completion:nil];
     } else if(indexPath.section == 4){
@@ -238,7 +238,7 @@
         }
     } else if(indexPath.section == 5){
         if(indexPath.row == 0){
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"About" message:@"Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"settingsVC.alert.about", @"About") message:NSLocalizedString(@"", @"Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly.") preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"@ay8s on Twitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 NSString *handle = @"ay8s";
                 
@@ -271,7 +271,7 @@
                     [self presentViewController:safariVC animated:YES completion:nil];
                 }
             }]];
-            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.cancel", @"Cancel") style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];
         } else if(indexPath.row == 1){
             NSString *handle = @"ay8s";
@@ -315,8 +315,8 @@
         
         [[[FIRAuth auth] currentUser] deleteWithCompletion:^(NSError * _Nullable error) {
             if(error){
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"general.whoops", @"Whoops") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.cancel", @"Cancel") style:UIAlertActionStyleCancel handler:nil]];
                 [self presentViewController:alert animated:YES completion:nil];
             } else {
                 [self dismissViewControllerAnimated:YES completion:^{
@@ -325,7 +325,7 @@
             }
         }];
     }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.cancel", @"Cancel") style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -343,14 +343,14 @@
         if(snapshot.exists){
             DDFUser *user = [[DDFUser alloc] initWithModelDictionary:snapshot.value];
             
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Change Name" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"settingsVC.alert.changeName", @"Change Name") message:NSLocalizedString(@"settingsVC.alert.changeName.message", @"") preferredStyle:UIAlertControllerStyleAlert];
             
             [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                [textField setPlaceholder:@"Name"];
+                [textField setPlaceholder:NSLocalizedString(@"settingsVC.alert.changeName.placeHolder", @"Name")];
                 [textField setText:user.name];
             }];
             
-            UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIAlertAction *saveAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"general.save", @"Save") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 if([alertController.textFields.firstObject.text isEqualToString:@""]){
                     return;
                 }
@@ -359,7 +359,7 @@
             }];
             [alertController addAction:saveAction];
 
-            [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.cancel", @"Cancel") style:UIAlertActionStyleCancel handler:nil]];
             
             [self presentViewController:alertController animated:YES completion:nil];
         }
@@ -395,8 +395,8 @@
                     [MBProgressHUD hideHUDForView:self.node.view animated:YES];
                 });
             } errorBlock:^(NSError *error) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"general.whoops", @"Whoops") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.gotIt", @"Got it") style:UIAlertActionStyleCancel handler:nil]];
                 [self presentViewController:alert animated:YES completion:nil];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -404,8 +404,8 @@
                 });
             }];
         } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"An error occured authenticating." preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"general.whoops", @"Whoops") message:NSLocalizedString(@"authVC.alert.otherError.message", @"An error occured authenticating.") preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.gotIt", @"Got it") style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];
         }
     }];

@@ -1,0 +1,107 @@
+/* 
+  Localizable.strings
+  WWDC Family
+
+  Created by ethanhuang13 on 2018/9/4.
+  Copyright © 2018年 AndyDev. All rights reserved.
+*/
+
+// General
+"general.whoops" = "Whoops";
+"general.gotIt" = "Got it";
+"general.setup" = "Setup";
+"general.save" = "Save";
+"general.cancel" = "Cancel";
+"general.close" = "Close";
+
+// AuthViewController
+"authVC.welcome" = "Welcome to\nConfFriends";
+"authVC.findHappeningSpots" = "Find the happening spots around San Jose during the week.";
+"authVC.meetNewPeople" = "Meet new people in town for the week, get in touch via their Twitter account by tapping their avatar.";
+"authVC.disableAndHide" = "Disable & hide your location at any point using the toggle below the map.";
+"authVC.adjustLocationAccuracy" = "Adjust location accuracy to minimise battery usage when it suits you.";
+"authVC.signInWithTwitter" = "Sign in with Twitter";
+"authVC.bySigningIn" = "By signing in you agree to our Privacy Policy.";
+"authVC.privacyPolicy" = "Privacy Policy";
+
+"authVC.alert.twitterIDMissing.message" = "Your Twitter ID is missing, please try signing in again.";
+"authVC.alert.twitterDisplayNameMissing.message" = "Your Twitter display name is missing, please try signing in again.";
+"authVC.alert.twitterUsername.message" = "Your Twitter username is missing, please try signing in again.";
+"authVC.alert.locationSharing" = "Location Sharing";
+"authVC.alert.locationSharing.message" = "ConfFriends shares your location with other ConfFriends users. If you wish to simply share your location with friends only, we'd suggest using Find my Friends.\n\nYou can continue to use ConfFriends without sharing your location if you wish.";
+"authVC.alert.locationSharing.share" = "Share My Location";
+"authVC.alert.locationSharing.dontShare" = "Don't Share Location";
+"authVC.alert.otherError.message" = "An error occured authenticating.";
+
+// MapViewController
+"mapVC.locationSwitch" = "Disable & Hide Location";
+
+// UsersViewController
+"usersVC.title" = "Users";
+"usersVC.all" = "All";
+"usersVC.alert.userNotSharing.message" = "This user doesn't currently have a location shared.";
+"usersVC.viewOnTwitter" = "View on Twitter";
+
+// SettingsViewController
+"settingsVC.title" = "Settings";
+
+"settingsVC.header.profile" = "Profile";
+"settingsVC.header.filter" = "Filter";
+"settingsVC.header.privacy" = "Privacy";
+"settingsVC.header.location" = "Location";
+"settingsVC.header.accountOptions" = "Account Options";
+"settingsVC.header.misc" = "Misc";
+
+"settingsVC.cell.changeName" = "Change Name";
+"settingsVC.cell.setCountry" = "Set Country";
+"settingsVC.cell.disableTwitterFollowingFilter" = "Disable Twitter Following Filter";
+"settingsVC.cell.refreshTwitterFollowingList" = "Refresh Twitter Following List";
+"settingsVC.cell.enableTwitterFollowingFilter" = "Enable Twitter Following Filter";
+"settingsVC.cell.setupTwitterFollowingFilter" = "Setup Twitter Following Filter";
+"settingsVC.cell.changeRemovePrivacyZone" = "Change/Remove Privacy Zone";
+"settingsVC.cell.setPrivacyZone" = "Set Privacy Zone";
+"settingsVC.cell.locationFuzzing" = "Location Fuzzing";
+"settingsVC.cell.changeLocationAccuracy" = "Change Location Accuracy";
+"settingsVC.cell.deleteAccount" = "Delete Account";
+"settingsVC.cell.signOut" = "Sign Out";
+"settingsVC.cell.aboutConfFriends" = "About ConfFriends";
+"settingsVC.cell.sendFeedback" = "Send Feedback";
+"settingsVC.cell.shareConfFriends" = "Share ConfFriends";
+"settingsVC.cell.privacyPolicy" = "Privacy Policy";
+
+"settingsVC.alert.changeName" = "Change Name";
+"settingsVC.alert.changeName.message" = "";
+"settingsVC.alert.changeName.placeHolder" = "Name";
+"settingsVC.alert.setupFilter" = "Setup Filter";
+"settingsVC.alert.setupFilter.message" = "The Twitter Following Filter will allow you to see only people you follow on Twitter that also use ConfFriends. We'll need to re-authenticate you to fetch your following list to store on the device.\n\nYou can disable/enable anytime once setup.";
+"settingsVC.alert.locationAccuracy" = "Location Accuracy";
+"settingsVC.alert.locationAccuracy.message" = "Select a location accuracy, higher accuracy options will use more power.";
+"settingsVC.alert.locationAccuracy.5meters" = "5 meters or better";
+"settingsVC.alert.locationAccuracy.15meters" = "15 meters or better";
+"settingsVC.alert.locationAccuracy.100meters" = "100 meters or better";
+"settingsVC.alert.locationAccuracy.1000meters" = "1000 meters or better";
+"settingsVC.alert.locationAccuracy.5000meters" = "5000 Meters or better";
+"settingsVC.alert.about" = "About";
+"settingsVC.alert.about.message" = "Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly.";
+
+// FuzzingViewController
+"fuzzingVC.title" = "Location Fuzzing";
+"fuzzingVC.description" = "Location fuzzing will throw off your location when away from WWDC.";
+"fuzzingVC.enableLocationFuzzing" = "Enable Location Fuzzing";
+"fuzzingVC.adjustRadius" = "Adjust the radius where location will be recorded without fuzzing using the slider below.";
+"fuzzingVC.fluffDistance" = "Fluff Distance";
+"fuzzingVC.theDistanceThat" = "The distance that your location will be adjusted when outside of the radius shown.";
+"fuzzingVC.100m" = "100m";
+"fuzzingVC.250m" = "250m";
+"fuzzingVC.500m" = "500m";
+"fuzzingVC.1000m" = "1000m";
+"fuzzingVC.2000m" = "2000m";
+
+// PrivacyZoneViewController
+"privacyZoneVC.title" = "Privacy Zone";
+"privacyZoneVC.description" = "Adding a Privacy Zone to ConfFriends will stop the app from sharing your location within the selected area shown in the map below. Move & scale the map to adjust the zone.\n\nPlease avoid centering the map over your home or hotel or other location so it doesn’t allow people to discover your location over time.";
+"privacyZoneVC.setPrivacyZone" = "Set Privacy Zone";
+"privacyZoneVC.deleteZone" = "Delete Zone";
+
+// CountryViewController
+"countryVC.title" = "Set Country";

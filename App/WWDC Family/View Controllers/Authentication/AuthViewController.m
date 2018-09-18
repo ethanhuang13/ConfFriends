@@ -26,7 +26,7 @@
     [self.node setAutomaticallyManagesSubnodes:YES];
     
     ASTextNode *headerTextNode = [ASTextNode new];
-    [headerTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Welcome to\nConfFriends" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:30 weight:UIFontWeightHeavy]}]];
+    [headerTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"authVC.welcome", @"Welcome to\nConfFriends") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:30 weight:UIFontWeightHeavy]}]];
     
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
@@ -36,33 +36,33 @@
     [placesIconNode setAttributedText:[[NSAttributedString alloc] initWithString:@"" attributes:@{NSFontAttributeName:[UIFont fontWithName:@"FontAwesome5ProLight" size:30.0], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6], NSParagraphStyleAttributeName:paragraphStyle}]];
     
     ASTextNode *placesTextNode = [ASTextNode new];
-    [placesTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Find the happening spots around San Jose during the week." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [placesTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"authVC.findHappeningSpots", @"Find the happening spots around San Jose during the week.") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     
     ASTextNode *meetIconNode = [ASTextNode new];
     [meetIconNode setAttributedText:[[NSAttributedString alloc] initWithString:@"" attributes:@{NSFontAttributeName:[UIFont fontWithName:@"FontAwesome5ProLight" size:30.0], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6], NSParagraphStyleAttributeName:paragraphStyle}]];
     
     ASTextNode *meetTextNode = [ASTextNode new];
-    [meetTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Meet new people in town for the week, get in touch via their Twitter account by tapping their avatar." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [meetTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"authVC.meetNewPeople", @"Meet new people in town for the week, get in touch via their Twitter account by tapping their avatar.") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     
     ASTextNode *disableLocationIconNode = [ASTextNode new];
     [disableLocationIconNode setAttributedText:[[NSAttributedString alloc] initWithString:@"" attributes:@{NSFontAttributeName:[UIFont fontWithName:@"FontAwesome5ProLight" size:30.0], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6], NSParagraphStyleAttributeName:paragraphStyle}]];
     
     ASTextNode *disableLocationTextNode = [ASTextNode new];
-    [disableLocationTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Disable & hide your location at any point using the toggle below the map." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [disableLocationTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"authVC.disableAndHide", @"Disable & hide your location at any point using the toggle below the map.") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     
     ASTextNode *batteryIconNode = [ASTextNode new];
     [batteryIconNode setAttributedText:[[NSAttributedString alloc] initWithString:@"" attributes:@{NSFontAttributeName:[UIFont fontWithName:@"FontAwesome5ProLight" size:30.0], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6], NSParagraphStyleAttributeName:paragraphStyle}]];
     
     ASTextNode *batteryPerformanceTextNode = [ASTextNode new];
-    [batteryPerformanceTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Adjust location accuracy to minimise battery usage when it suits you." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [batteryPerformanceTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"authVC.adjustLocationAccuracy", @"Adjust location accuracy to minimise battery usage when it suits you.") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     
     
     ASButtonNode *authenticateButton = [ASButtonNode new];
-    [authenticateButton setTitle:@"Sign in with Twitter" withFont:[UIFont systemFontOfSize:14.0 weight:UIFontWeightSemibold] withColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [authenticateButton setTitle:NSLocalizedString(@"authVC.signInWithTwitter", @"Sign in with Twitter") withFont:[UIFont systemFontOfSize:14.0 weight:UIFontWeightSemibold] withColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [authenticateButton setBackgroundImage:[UIImage fc_solidColorImageWithSize:CGSizeMake(1, 1) color:[UIColor fc_colorWithHexString:@"ff0066"]] forState:UIControlStateNormal];
     [authenticateButton setBackgroundImage:[UIImage fc_solidColorImageWithSize:CGSizeMake(1, 1) color:[UIColor fc_colorWithHexString:@"ff3686"]] forState:UIControlStateHighlighted];
     [authenticateButton addTarget:self action:@selector(startTwitterAuthentication) forControlEvents:ASControlNodeEventTouchUpInside];
@@ -76,9 +76,9 @@
     
     
     ASTextNode *privacyTextNode = [ASTextNode new];
-    NSString *privacyString = @"By signing in you agree to our Privacy Policy.";
+    NSString *privacyString = NSLocalizedString(@"authVC.bySigningIn", @"By signing in you agree to our Privacy Policy.");
     NSMutableAttributedString *privacyAttributedString = [[NSMutableAttributedString alloc] initWithString:privacyString attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.5]}];
-    [privacyAttributedString addAttributes:@{NSForegroundColorAttributeName:[UIColor fc_colorWithHexString:@"ff0066"]} range:[privacyString rangeOfString:@"Privacy Policy"]];
+    [privacyAttributedString addAttributes:@{NSForegroundColorAttributeName:[UIColor fc_colorWithHexString:@"ff0066"]} range:[privacyString rangeOfString:NSLocalizedString(@"authVC.privacyPolicy", @"Privacy Policy")]];
     [privacyTextNode setAttributedText:privacyAttributedString];
     [privacyTextNode setUserInteractionEnabled:YES];
     [privacyTextNode addTarget:self action:@selector(presentPrivacyPolicy) forControlEvents:ASControlNodeEventTouchUpInside];
@@ -146,15 +146,15 @@
                 });
                 
                 if (error) {
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"general.whoops", @"Whoops") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.gotIt", @"Got it") style:UIAlertActionStyleCancel handler:nil]];
                     [self presentViewController:alert animated:YES completion:nil];
                     return;
                 }
                 
                 if(!user.providerData[0].uid){
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"Your Twitter ID is missing, please try signing in again." preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"general.whoops", @"Whoops") message:NSLocalizedString(@"authVC.alert.twitterIDMissing.message", @"Your Twitter ID is missing, please try signing in again.") preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.gotIt", @"Got it") style:UIAlertActionStyleCancel handler:nil]];
                     [self presentViewController:alert animated:YES completion:nil];
                     
                     [[FIRAuth auth] signOut:nil];
@@ -162,8 +162,8 @@
                 }
                 
                 if(!user.providerData[0].displayName){
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"Your Twitter display name is missing, please try signing in again." preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"general.whoops", @"Whoops") message:NSLocalizedString(@"authVC.alert.twitterDisplayNameMissing.message", @"Your Twitter display name is missing, please try signing in again.") preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.gotIt", @"Got it") style:UIAlertActionStyleCancel handler:nil]];
                     [self presentViewController:alert animated:YES completion:nil];
                     
                     [[FIRAuth auth] signOut:nil];
@@ -171,7 +171,7 @@
                 }
                 
                 if(!credentials.username){
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"Your Twitter username is missing, please try signing in again." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"general.whoops", @"Whoops") message:NSLocalizedString(@"authVC.alert.twitterUsername.message", @"Your Twitter username is missing, please try signing in again.") preferredStyle:UIAlertControllerStyleAlert];
                     [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
                     [self presentViewController:alert animated:YES completion:nil];
                     
@@ -184,9 +184,9 @@
                 BOOL privacyOptionEnabled = YES;
                 
                 if(privacyOptionEnabled){
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Location Sharing" message:@"ConfFriends shares your location with other ConfFriends users. If you wish to simply share your location with friends only, we'd suggest using Find my Friends.\n\nYou can continue to use ConfFriends without sharing your location if you wish." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"authVC.alert.locationSharing", @"Location Sharing") message:NSLocalizedString(@"authVC.alert.locationSharing.message", @"ConfFriends shares your location with other ConfFriends users. If you wish to simply share your location with friends only, we'd suggest using Find my Friends.\n\nYou can continue to use ConfFriends without sharing your location if you wish.") preferredStyle:UIAlertControllerStyleAlert];
                     
-                    [alert addAction:[UIAlertAction actionWithTitle:@"Share My Location" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"authVC.alert.locationSharing.share", @"Share My Location") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DDFLocationDisabled"];
                         [[NSUserDefaults standardUserDefaults] synchronize];
                         
@@ -198,7 +198,7 @@
                         [self dismissViewControllerAnimated:YES completion:nil];
                     }]];
                     
-                    [alert addAction:[UIAlertAction actionWithTitle:@"Don't Share Location" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"authVC.alert.locationSharing.dontShare", @"Don't Share Location") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"DDFLocationDisabled"];
                         [[NSUserDefaults standardUserDefaults] synchronize];
                         
@@ -216,8 +216,8 @@
                 }
             }];
         } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Whoops" message:@"An error occured authenticating." preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"Got it" style:UIAlertActionStyleCancel handler:nil]];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"general.whoops", @"Whoops") message:NSLocalizedString(@"authVC.alert.otherError.message", @"An error occured authenticating.") preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"general.gotIt", @"Got it") style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];
         }
     }];

@@ -110,7 +110,7 @@
     [locationSwitchNode setUserInteractionEnabled:YES];
     
     ASTextNode *switchTextNode = [[ASTextNode alloc] init];
-    [switchTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Disable & Hide Location" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0 weight:UIFontWeightRegular]}]];
+    [switchTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"mapVC.locationSwitch", @"Disable & Hide Location") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0 weight:UIFontWeightRegular]}]];
     
     ASDisplayNode *dividerNode = [[ASDisplayNode alloc] init];
     [dividerNode setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.1]];

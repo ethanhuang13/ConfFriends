@@ -23,10 +23,10 @@
     if (!(self = [super initWithNode:[[ASDisplayNode alloc] init]]))
         return nil;
     
-    self.title = @"Location Fuzzing";
+    self.title = NSLocalizedString(@"fuzzingVC.title", @"Location Fuzzing");
     self.node.backgroundColor = [UIColor whiteColor];
     
-    NSString *descriptionString = @"Location fuzzing will throw off your location when away from WWDC.";
+    NSString *descriptionString = NSLocalizedString(@"fuzzingVC.description", @"Location fuzzing will throw off your location when away from WWDC.");
     
     NSMutableAttributedString *descriptionAttributedString = [[NSMutableAttributedString alloc] initWithString:descriptionString attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}];
     
@@ -44,7 +44,7 @@
     [fuzzSwitchNode setUserInteractionEnabled:YES];
     
     ASTextNode *enableTextNode = [ASTextNode new];
-    [enableTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Enable Location Fuzzing" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [enableTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"fuzzingVC.enableLocationFuzzing", @"Enable Location Fuzzing") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     
     // Map
@@ -79,10 +79,10 @@
     
     // Radius
     ASTextNode *radiusTitleNode = [ASTextNode new];
-    [radiusTitleNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Radius" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15 weight:UIFontWeightHeavy], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [radiusTitleNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"", @"Radius") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15 weight:UIFontWeightHeavy], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     ASTextNode *radiusTextNode = [ASTextNode new];
-    [radiusTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Adjust the radius where location will be recorded without fuzzing using the slider below." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [radiusTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"fuzzingVC.adjustRadius", @"Adjust the radius where location will be recorded without fuzzing using the slider below.") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     
     ASDisplayNode *radiusSliderNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
@@ -105,14 +105,14 @@
     
     // Radius
     ASTextNode *fluffTitleNode = [ASTextNode new];
-    [fluffTitleNode setAttributedText:[[NSAttributedString alloc] initWithString:@"Fluff Distance" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15 weight:UIFontWeightHeavy], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [fluffTitleNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"fuzzingVC.fluffDistance", @"Fluff Distance") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15 weight:UIFontWeightHeavy], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     ASTextNode *fluffTextNode = [ASTextNode new];
-    [fluffTextNode setAttributedText:[[NSAttributedString alloc] initWithString:@"The distance that your location will be adjusted when outside of the radius shown." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [fluffTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"fuzzingVC.theDistanceThat", @"The distance that your location will be adjusted when outside of the radius shown.") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     
     ASDisplayNode *distanceSegmentNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
-        UISegmentedControl *distanceSegmentControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"100m", @"250m", @"500m", @"1000m", @"2000m", nil]];
+        UISegmentedControl *distanceSegmentControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NSLocalizedString(@"fuzzingVC.100m", @"100m"), NSLocalizedString(@"fuzzingVC.250m", @"250m"), NSLocalizedString(@"fuzzingVC.500m", @"500m"), NSLocalizedString(@"fuzzingVC.1000m", @"1000m"), NSLocalizedString(@"fuzzingVC.2000m", @"2000m"), nil]];
         [distanceSegmentControl addTarget:self action:@selector(distanceSegmentChanged:) forControlEvents:UIControlEventValueChanged];
         if([[NSUserDefaults standardUserDefaults] valueForKey:@"DDFLocationFuzzingDistance"]){
             NSInteger distance = [[NSUserDefaults standardUserDefaults] integerForKey:@"DDFLocationFuzzingDistance"];
@@ -170,7 +170,7 @@
     
     [self.node setAutomaticallyManagesSubnodes:YES];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"general.close", @"Close") style:UIBarButtonItemStylePlain target:self action:@selector(dismissView)];
     
     return self;
 }
