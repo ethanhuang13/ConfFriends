@@ -82,12 +82,13 @@
 "settingsVC.alert.locationAccuracy.1000meters" = "1000 meters or better";
 "settingsVC.alert.locationAccuracy.5000meters" = "5000 Meters or better";
 "settingsVC.alert.about" = "About";
-"settingsVC.alert.about.message" = "Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly.";
+"settingsVC.alert.about.message" = "Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.";
 
 // FuzzingViewController
 "fuzzingVC.title" = "Location Fuzzing";
 "fuzzingVC.description" = "Location fuzzing will throw off your location when away from WWDC.";
 "fuzzingVC.enableLocationFuzzing" = "Enable Location Fuzzing";
+"fuzzingVC.radius" = "Radius";
 "fuzzingVC.adjustRadius" = "Adjust the radius where location will be recorded without fuzzing using the slider below.";
 "fuzzingVC.fluffDistance" = "Fluff Distance";
 "fuzzingVC.theDistanceThat" = "The distance that your location will be adjusted when outside of the radius shown.";

@@ -238,7 +238,7 @@
         }
     } else if(indexPath.section == 5){
         if(indexPath.row == 0){
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"settingsVC.alert.about", @"About") message:NSLocalizedString(@"", @"Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly.") preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"settingsVC.alert.about", @"About") message:NSLocalizedString(@"settingsVC.alert.about.message", @"Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly.") preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"@ay8s on Twitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 NSString *handle = @"ay8s";
                 
