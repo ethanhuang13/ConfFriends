@@ -79,7 +79,7 @@
     
     // Radius
     ASTextNode *radiusTitleNode = [ASTextNode new];
-    [radiusTitleNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"", @"Radius") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15 weight:UIFontWeightHeavy], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
+    [radiusTitleNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"fuzzingVC.radius", @"Radius") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15 weight:UIFontWeightHeavy], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];
     
     ASTextNode *radiusTextNode = [ASTextNode new];
     [radiusTextNode setAttributedText:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"fuzzingVC.adjustRadius", @"Adjust the radius where location will be recorded without fuzzing using the slider below.") attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular], NSForegroundColorAttributeName:[UIColor colorWithWhite:0.0 alpha:0.6]}]];

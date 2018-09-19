@@ -82,13 +82,14 @@
 "settingsVC.alert.locationAccuracy.1000meters" = "1000 公尺或更佳";
 "settingsVC.alert.locationAccuracy.5000meters" = "5000 公尺或更佳";
 "settingsVC.alert.about" = "關於";
-"settingsVC.alert.about.message" = "Building upon past WWDC Family apps, ConfFriends was built for privacy and performance in mind by Andrew Yates (@ay8s) using Texture & Firebase, inspired by Felix Krause's (@KrauseFx) past iteration.\n\nConfFriends will be available on GitHub shortly.";
+"settingsVC.alert.about.message" = "ConfFriends 是 Andrew Yates (@ay8s) 使用 Texture 與 Firebase 開發，以重視隱私與效能為精神，源自於 Felix Krause's (@KrauseFx) 的 WWDC Family apps。";
 
 // FuzzingViewController
 "fuzzingVC.title" = "位置模糊化";
 "fuzzingVC.description" = "當你不在 WWDC 附近時，位置模糊化會故意偏移你的所在位置。";
 "fuzzingVC.enableLocationFuzzing" = "開啟位置模糊化";
 "fuzzingVC.adjustRadius" = "用下方的拉桿來調整半徑，半徑內的區域不會模糊化。";
+"fuzzingVC.radius" = "半徑";
 "fuzzingVC.fluffDistance" = "偏移距離";
 "fuzzingVC.theDistanceThat" = "位於半徑區域以外時，你的定位會被偏移的程度。";
 "fuzzingVC.100m" = "100 m";
